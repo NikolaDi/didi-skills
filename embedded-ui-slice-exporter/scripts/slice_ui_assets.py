@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import socket
@@ -12,6 +13,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
 
+import numpy as np
 from PIL import Image
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
@@ -79,8 +81,9 @@ html.__export-glyph-capture body {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Export Embedded Export Spec v2 UI assets.")
-    parser.add_argument("--html", default="index.html")
+    parser.add_argument("--html", nargs="+", required=True, help="One or more HTML files to process.")
     parser.add_argument("--output-dir")
+    parser.add_argument("--output-name", help="Output folder name. Defaults to first HTML stem.")
     parser.add_argument("--root-selector", default="[data-ui-root]")
     parser.add_argument("--wait-ms", type=int, default=250)
     return parser.parse_args()
@@ -90,6 +93,27 @@ def sanitize_name(name: str) -> str:
     slug = re.sub(r"[^a-zA-Z0-9_-]+", "-", name.strip())
     slug = slug.strip("-").lower()
     return slug or "slice"
+
+
+STATE_ABBR = {"normal": "n", "active": "a", "pressed": "p", "disabled": "d"}
+
+
+def state_abbr(state_name: str) -> str:
+    return STATE_ABBR.get(state_name, sanitize_name(state_name)[:2])
+
+
+def images_equal(a: Image.Image, b: Image.Image, max_channel_diff: int = 10, max_diff_ratio: float = 0.005) -> bool:
+    if a.size != b.size:
+        return False
+    if a.tobytes() == b.tobytes():
+        return True
+    pa = np.array(a, dtype=np.int16)
+    pb = np.array(b, dtype=np.int16)
+    diff = np.abs(pa - pb)
+    pixel_diff = diff.max(axis=2) > max_channel_diff
+    diff_count = pixel_diff.sum()
+    total = a.size[0] * a.size[1]
+    return diff_count / total < max_diff_ratio
 
 
 def prepare_dir(path: Path) -> Path:
@@ -102,12 +126,6 @@ def prepare_dir(path: Path) -> Path:
 def ensure_dir(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path
-
-
-def parse_csv(value: str | None, default: list[str] | None = None) -> list[str]:
-    if value is None or not value.strip():
-        return list(default or [])
-    return [part.strip() for part in value.split(",") if part.strip()]
 
 
 def determine_glyph_chars(text_node: dict[str, Any]) -> set[str]:
@@ -131,12 +149,6 @@ def glyph_char_name(char: str) -> str:
     if char in special_names:
         return special_names[char]
     return sanitize_name(char)
-
-
-def resolve_output_dir(html_path: Path, output_dir_arg: str | None) -> Path:
-    folder_name = f"slices_{sanitize_name(html_path.stem)}"
-    parent_dir = Path(output_dir_arg).resolve() if output_dir_arg else Path.cwd().resolve()
-    return (parent_dir / folder_name).resolve()
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -248,7 +260,7 @@ def get_root_metadata(page, root_selector: str) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise RuntimeError(f"Root selector not found: {root_selector}")
     if str(data.get("version") or "") != "2":
-        raise RuntimeError("Root node must declare data-ui-version=\"2\".")
+        raise RuntimeError('Root node must declare data-ui-version="2".')
 
     screen_width = int(data["screenWidth"]) if str(data.get("screenWidth") or "").isdigit() else int(data["width"])
     screen_height = int(data["screenHeight"]) if str(data.get("screenHeight") or "").isdigit() else int(data["height"])
@@ -444,12 +456,11 @@ def get_export_nodes(page, cdp, root_selector: str, page_id: str) -> list[dict[s
 
             const rootRect = root.getBoundingClientRect();
             const nodes = Array.from(activePage.querySelectorAll('[data-export-node]'));
-            
-            // 为每个节点添加临时 id 以便 CDP 查找
+
             nodes.forEach((el, index) => {
               el.setAttribute('data-export-cdp-id', `cdp-${pageId}-${index}`);
             });
-            
+
             return nodes.map((el) => {
               const rect = el.getBoundingClientRect();
               const style = window.getComputedStyle(el);
@@ -518,14 +529,12 @@ def get_export_nodes(page, cdp, root_selector: str, page_id: str) -> list[dict[s
             raise RuntimeError(f"Duplicate data-export-id detected in page {page_id}: {export_id}")
         node_ids.add(export_id)
         node_type = str(item.get("type") or "").strip()
-        
+
         cdp_id = str(item.get("cdpId") or "")
-        
-        # Get actual rendered fonts via CDP
+
         rendered_fonts = []
         if cdp_id:
             try:
-                # Need to resolve the DOM node ID first
                 node_info = cdp.send("DOM.getDocument")
                 root_node_id = node_info["root"]["nodeId"]
                 query_result = cdp.send("DOM.querySelector", {
@@ -533,7 +542,7 @@ def get_export_nodes(page, cdp, root_selector: str, page_id: str) -> list[dict[s
                     "selector": f"[data-export-cdp-id='{cdp_id}']"
                 })
                 target_node_id = query_result.get("nodeId")
-                
+
                 if target_node_id:
                     fonts_result = cdp.send("CSS.getPlatformFontsForNode", {
                         "nodeId": target_node_id
@@ -542,7 +551,7 @@ def get_export_nodes(page, cdp, root_selector: str, page_id: str) -> list[dict[s
                         rendered_fonts = [font["familyName"] for font in fonts_result["fonts"]]
             except Exception as e:
                 print(f"Warning: Failed to get rendered fonts for {export_id}: {e}")
-                
+
         if "styleSnapshot" in item:
             item["styleSnapshot"]["renderedFonts"] = rendered_fonts
 
@@ -669,7 +678,7 @@ def capture_node_asset(
     node: dict[str, Any],
     output_path: Path,
     state_name: str | None = None,
-) -> str:
+) -> tuple[str, Image.Image]:
     set_mode(page, "__export-transparent", "__export-node-capture")
     restore_export_node_defaults(page)
     set_capture_target(page, root_selector, page_id, str(node["id"]), state_name)
@@ -688,267 +697,326 @@ def capture_node_asset(
         output_path,
     )
     restore_export_node_defaults(page)
-    return str(output_path)
+    with Image.open(output_path) as img:
+        img_copy = img.copy()
+    return str(output_path), img_copy
+
+
+def process_html_file(
+    html_path: Path,
+    server_base_url: str,
+    playwright_ctx,
+    assets_dir: Path,
+    global_page_counter: int,
+    seen_controls: dict[tuple, list[dict[str, Any]]],
+    glyph_sets: dict[str, dict[str, Any]],
+    args,
+) -> tuple[list[dict[str, Any]], int]:
+    """Process a single HTML file. Returns (page_manifests, updated_page_counter)."""
+    html_dir = html_path.parent
+    page_url = f"{server_base_url}/{html_path.relative_to(html_dir).as_posix()}"
+
+    context = playwright_ctx.chromium.launch().new_context(
+        viewport={"width": 1100, "height": 760}, device_scale_factor=1
+    )
+    page = context.new_page()
+    cdp = page.context.new_cdp_session(page)
+    cdp.send("DOM.enable")
+    cdp.send("CSS.enable")
+
+    page.goto(page_url, wait_until="networkidle")
+    page.wait_for_timeout(args.wait_ms)
+    install_export_style(page)
+    mark_export_default_classes(page)
+
+    root_meta = get_root_metadata(page, args.root_selector)
+    root_box = {
+        "x": int(root_meta["x"]),
+        "y": int(root_meta["y"]),
+        "width": int(root_meta["width"]),
+        "height": int(root_meta["height"]),
+    }
+
+    pages = get_pages(page, args.root_selector)
+    page_manifests: list[dict[str, Any]] = []
+    counter = global_page_counter
+
+    with TemporaryDirectory() as temp_dir_name:
+        temp_dir = Path(temp_dir_name)
+
+        for page_info in pages:
+            counter += 1
+            page_id = str(page_info["id"])
+            page_title = str(page_info["title"])
+            page_index = int(page_info["index"])
+            pn = f"p{counter:02d}"
+
+            activate_page(page, args.root_selector, page_id)
+            restore_export_node_defaults(page)
+
+            set_mode(page)
+            composite_raw = temp_dir / f"{pn}-composite.png"
+            page.screenshot(path=str(composite_raw))
+            composite_path = assets_dir / f"{pn}_preview.png"
+            crop_image(composite_raw, root_box, composite_path)
+
+            nodes = get_export_nodes(page, cdp, args.root_selector, page_id)
+
+            set_mode(page, "__export-base")
+            page.wait_for_timeout(80)
+            base_raw = temp_dir / f"{pn}-base.png"
+            page.screenshot(path=str(base_raw))
+            base_path = assets_dir / f"{pn}_base.png"
+            crop_image(base_raw, root_box, base_path)
+
+            page_manifest = {
+                "id": page_id,
+                "title": page_title,
+                "index": page_index,
+                "source_html": str(html_path),
+                "files": {
+                    "base": str(base_path),
+                    "preview": str(composite_path),
+                },
+                "nodes": [],
+            }
+
+            for node in nodes:
+                node_type = str(node["type"])
+
+                if node_type == "text":
+                    node_manifest = build_text_manifest(node)
+                    page_manifest["nodes"].append(node_manifest)
+                    glyph_set = str(node.get("glyphSet") or "")
+                    if glyph_set:
+                        if glyph_set not in glyph_sets:
+                            glyph_sets[glyph_set] = {
+                                "chars": set(),
+                                "style_snapshot": dict(node.get("styleSnapshot") or {}),
+                                "font_token": str(node.get("fontToken") or ""),
+                            }
+                        glyph_sets[glyph_set]["chars"].update(determine_glyph_chars(node))
+                    continue
+
+                if node_type == "control":
+                    states = list(node.get("states") or [])
+                    if not states:
+                        states = ["normal"]
+                    node_id = str(node["id"])
+                    sig = (int(node["width"]), int(node["height"]), str(node.get("controlType") or ""))
+
+                    state_files: dict[str, str] = {}
+                    state_images: dict[str, Image.Image] = {}
+                    for state_name in states:
+                        fname = f"{pn}_ctrl_{sanitize_name(node_id)}_{state_abbr(state_name)}.png"
+                        state_path = assets_dir / fname
+                        _, img = capture_node_asset(
+                            page, temp_dir, args.root_selector, root_box,
+                            page_id, pn, node, state_path, state_name,
+                        )
+                        state_files[state_name] = str(state_path)
+                        state_images[state_name] = img
+
+                    dedup_from = None
+                    if sig in seen_controls:
+                        for entry in seen_controls[sig]:
+                            all_match = True
+                            for sn in states:
+                                if sn not in entry["state_images"]:
+                                    all_match = False
+                                    break
+                                if not images_equal(state_images[sn], entry["state_images"][sn]):
+                                    all_match = False
+                                    break
+                            if all_match:
+                                dedup_from = entry["export_id"]
+                                break
+
+                    if dedup_from:
+                        for fp in state_files.values():
+                            Path(fp).unlink(missing_ok=True)
+                        ref_entry = next(e for e in seen_controls[sig] if e["export_id"] == dedup_from)
+                        node_manifest = {
+                            "id": node_id,
+                            "type": "control",
+                            "control_type": str(node.get("controlType") or ""),
+                            "action": str(node.get("action") or ""),
+                            "target_page": str(node.get("targetPage") or ""),
+                            "x": int(node["x"]),
+                            "y": int(node["y"]),
+                            "width": int(node["width"]),
+                            "height": int(node["height"]),
+                            "states": ref_entry["state_files"],
+                            "deduplicated_from": dedup_from,
+                        }
+                    else:
+                        if sig not in seen_controls:
+                            seen_controls[sig] = []
+                        seen_controls[sig].append({
+                            "export_id": node_id,
+                            "state_images": state_images,
+                            "state_files": state_files,
+                        })
+                        node_manifest = {
+                            "id": node_id,
+                            "type": "control",
+                            "control_type": str(node.get("controlType") or ""),
+                            "action": str(node.get("action") or ""),
+                            "target_page": str(node.get("targetPage") or ""),
+                            "x": int(node["x"]),
+                            "y": int(node["y"]),
+                            "width": int(node["width"]),
+                            "height": int(node["height"]),
+                            "states": state_files,
+                        }
+                    page_manifest["nodes"].append(node_manifest)
+                    continue
+
+                if node_type == "static":
+                    fname = f"{pn}_static_{sanitize_name(str(node['id']))}.png"
+                    static_path = assets_dir / fname
+                    file_str, _ = capture_node_asset(
+                        page, temp_dir, args.root_selector, root_box,
+                        page_id, pn, node, static_path,
+                    )
+                    page_manifest["nodes"].append({
+                        "id": str(node["id"]),
+                        "type": "static",
+                        "x": int(node["x"]),
+                        "y": int(node["y"]),
+                        "width": int(node["width"]),
+                        "height": int(node["height"]),
+                        "file": file_str,
+                    })
+                    continue
+
+                if node_type == "image":
+                    fname = f"{pn}_img_{sanitize_name(str(node['id']))}.png"
+                    image_path = assets_dir / fname
+                    file_str, _ = capture_node_asset(
+                        page, temp_dir, args.root_selector, root_box,
+                        page_id, pn, node, image_path,
+                    )
+                    page_manifest["nodes"].append({
+                        "id": str(node["id"]),
+                        "type": "image",
+                        "bind": str(node.get("bind") or ""),
+                        "image_type": str(node.get("imageType") or ""),
+                        "x": int(node["x"]),
+                        "y": int(node["y"]),
+                        "width": int(node["width"]),
+                        "height": int(node["height"]),
+                        "file": file_str,
+                    })
+                    continue
+
+                if node_type == "indicator":
+                    indicator_states = list(node.get("states") or [])
+                    if not indicator_states:
+                        indicator_states = ["normal"]
+                    ind_state_files: dict[str, str] = {}
+                    for state_name in indicator_states:
+                        fname = f"{pn}_ind_{sanitize_name(str(node['id']))}_{state_abbr(state_name)}.png"
+                        state_path = assets_dir / fname
+                        file_str, _ = capture_node_asset(
+                            page, temp_dir, args.root_selector, root_box,
+                            page_id, pn, node, state_path, state_name,
+                        )
+                        ind_state_files[state_name] = file_str
+                    page_manifest["nodes"].append({
+                        "id": str(node["id"]),
+                        "type": "indicator",
+                        "bind": str(node.get("bind") or ""),
+                        "indicator_type": str(node.get("indicatorType") or ""),
+                        "x": int(node["x"]),
+                        "y": int(node["y"]),
+                        "width": int(node["width"]),
+                        "height": int(node["height"]),
+                        "states": ind_state_files,
+                    })
+                    continue
+
+                if node_type == "container":
+                    page_manifest["nodes"].append(build_region_manifest(node, node_type))
+                    continue
+
+                raise RuntimeError(f"Unsupported data-export-node type: {node_type}")
+
+            page_manifests.append(page_manifest)
+
+    context.close()
+    return page_manifests, counter
 
 
 def main() -> int:
     args = parse_args()
-    html_path = Path(args.html).resolve()
-    if not html_path.exists():
-        raise FileNotFoundError(f"HTML file not found: {html_path}")
+    html_paths = [Path(h).resolve() for h in args.html]
+    for p in html_paths:
+        if not p.exists():
+            raise FileNotFoundError(f"HTML file not found: {p}")
 
-    html_dir = html_path.parent
-    output_dir = prepare_dir(resolve_output_dir(html_path, args.output_dir))
-    base_dir = prepare_dir(output_dir / "base")
-    preview_dir = prepare_dir(output_dir / "preview")
-    controls_dir = prepare_dir(output_dir / "controls")
-    static_dir = prepare_dir(output_dir / "static")
-    images_dir = prepare_dir(output_dir / "images")
-    indicators_dir = prepare_dir(output_dir / "indicators")
-    glyphs_dir = prepare_dir(output_dir / "glyphs")
+    folder_name = args.output_name or f"slices_{sanitize_name(html_paths[0].stem)}"
+    parent_dir = Path(args.output_dir).resolve() if args.output_dir else Path.cwd().resolve()
+    output_dir = prepare_dir(parent_dir / folder_name)
+    assets_dir = prepare_dir(output_dir / "assets")
+
+    # Collect all HTML directories for the local server (must serve from common ancestor)
+    html_dirs = list({p.parent for p in html_paths})
+    common_root = Path(os.path.commonpath(html_dirs)) if len(html_dirs) > 1 else html_dirs[0]
 
     manifest: dict[str, Any] = {
         "version": 2,
-        "source_html": str(html_path),
+        "source_html": [str(p) for p in html_paths],
         "root_selector": args.root_selector,
         "screen": {},
         "pages": [],
         "glyph_sets": {},
     }
 
-    with LocalServer(html_dir) as server:
-        page_url = f"{server.base_url}/{html_path.relative_to(html_dir).as_posix()}"
+    seen_controls: dict[tuple, list[dict[str, Any]]] = {}
+    glyph_sets: dict[str, dict[str, Any]] = {}
+    global_page_counter = 0
 
+    with LocalServer(common_root) as server:
         with sync_playwright() as playwright:
-            try:
-                browser = playwright.chromium.launch()
-            except PlaywrightError as exc:
-                raise RuntimeError(
-                    "Chromium is not available for Playwright. Run: python -m playwright install chromium"
-                ) from exc
+            for html_path in html_paths:
+                page_manifests, global_page_counter = process_html_file(
+                    html_path,
+                    server.base_url,
+                    playwright,
+                    assets_dir,
+                    global_page_counter,
+                    seen_controls,
+                    glyph_sets,
+                    args,
+                )
+                manifest["pages"].extend(page_manifests)
 
-            context = browser.new_context(viewport={"width": 1100, "height": 760}, device_scale_factor=1)
-            page = context.new_page()
-            
-            # Enable CSS agent for CDP font retrieval later
-            cdp = page.context.new_cdp_session(page)
-            cdp.send("DOM.enable")
-            cdp.send("CSS.enable")
-            
-            page.goto(page_url, wait_until="networkidle")
-            page.wait_for_timeout(args.wait_ms)
-            install_export_style(page)
-            mark_export_default_classes(page)
+                # Set screen from first file
+                if "width" not in manifest["screen"]:
+                    # Re-read root metadata from manifest pages
+                    pass
 
-            root_meta = get_root_metadata(page, args.root_selector)
-            manifest["screen"] = {
-                "width": int(root_meta["screen_width"]),
-                "height": int(root_meta["screen_height"]),
-            }
-            root_box = {
-                "x": int(root_meta["x"]),
-                "y": int(root_meta["y"]),
-                "width": int(root_meta["width"]),
-                "height": int(root_meta["height"]),
-            }
+            # Render glyphs into assets/ with glyph_ prefix
+            if glyph_sets:
+                # Need a live page to render glyphs — open last HTML
+                last_html = html_paths[-1]
+                html_dir = last_html.parent
+                page_url = f"{server.base_url}/{last_html.relative_to(html_dir).as_posix()}"
+                context = playwright.chromium.launch().new_context(
+                    viewport={"width": 1100, "height": 760}, device_scale_factor=1
+                )
+                page = context.new_page()
+                page.goto(page_url, wait_until="networkidle")
+                page.wait_for_timeout(args.wait_ms)
+                install_export_style(page)
 
-            pages = get_pages(page, args.root_selector)
-            glyph_sets: dict[str, dict[str, Any]] = {}
+                set_mode(page, "__export-transparent", "__export-glyph-capture")
+                page.wait_for_timeout(80)
 
-            with TemporaryDirectory() as temp_dir_name:
-                temp_dir = Path(temp_dir_name)
-
-                for order, page_info in enumerate(pages, start=1):
-                    page_id = str(page_info["id"])
-                    page_title = str(page_info["title"])
-                    page_index = int(page_info["index"])
-                    page_folder = f"page_{order:02d}"
-
-                    activate_page(page, args.root_selector, page_id)
-                    restore_export_node_defaults(page)
-
-                    page_base_dir = ensure_dir(base_dir / page_folder)
-                    page_preview_dir = ensure_dir(preview_dir / page_folder)
-                    page_controls_dir = ensure_dir(controls_dir / page_folder)
-                    page_static_dir = ensure_dir(static_dir / page_folder)
-                    page_images_dir = ensure_dir(images_dir / page_folder)
-                    page_indicators_dir = ensure_dir(indicators_dir / page_folder)
-
-                    set_mode(page)
-                    composite_raw = temp_dir / f"{page_folder}-composite.png"
-                    page.screenshot(path=str(composite_raw))
-                    composite_path = page_preview_dir / "full_composite.png"
-                    crop_image(composite_raw, root_box, composite_path)
-
-                    nodes = get_export_nodes(page, cdp, args.root_selector, page_id)
-
-                    set_mode(page, "__export-base")
-                    page.wait_for_timeout(80)
-                    base_raw = temp_dir / f"{page_folder}-base.png"
-                    page.screenshot(path=str(base_raw))
-                    base_path = page_base_dir / "static_base.png"
-                    crop_image(base_raw, root_box, base_path)
-
-                    page_manifest = {
-                        "id": page_id,
-                        "title": page_title,
-                        "index": page_index,
-                        "files": {
-                            "base": str(base_path),
-                            "preview": str(composite_path),
-                        },
-                        "nodes": [],
-                    }
-
-                    for node in nodes:
-                        node_type = str(node["type"])
-                        if node_type == "text":
-                            node_manifest = build_text_manifest(node)
-                            page_manifest["nodes"].append(node_manifest)
-                            glyph_set = str(node.get("glyphSet") or "")
-                            if glyph_set:
-                                if glyph_set not in glyph_sets:
-                                    glyph_sets[glyph_set] = {
-                                        "chars": set(),
-                                        "style_snapshot": dict(node.get("styleSnapshot") or {}),
-                                        "font_token": str(node.get("fontToken") or ""),
-                                    }
-                                glyph_sets[glyph_set]["chars"].update(determine_glyph_chars(node))
-                            continue
-
-                        if node_type == "control":
-                            states = list(node.get("states") or [])
-                            if not states:
-                                states = ["normal"]
-                            control_dir = ensure_dir(page_controls_dir / sanitize_name(str(node["id"])))
-                            state_files: dict[str, str] = {}
-                            for state_name in states:
-                                state_path = control_dir / f"{sanitize_name(state_name)}.png"
-                                state_files[state_name] = capture_node_asset(
-                                    page,
-                                    temp_dir,
-                                    args.root_selector,
-                                    root_box,
-                                    page_id,
-                                    page_folder,
-                                    node,
-                                    state_path,
-                                    state_name,
-                                )
-                            page_manifest["nodes"].append(
-                                {
-                                    "id": str(node["id"]),
-                                    "type": "control",
-                                    "control_type": str(node.get("controlType") or ""),
-                                    "action": str(node.get("action") or ""),
-                                    "target_page": str(node.get("targetPage") or ""),
-                                    "x": int(node["x"]),
-                                    "y": int(node["y"]),
-                                    "width": int(node["width"]),
-                                    "height": int(node["height"]),
-                                    "states": state_files,
-                                }
-                            )
-                            continue
-
-                        if node_type == "static":
-                            static_path = page_static_dir / f"{sanitize_name(str(node['id']))}.png"
-                            page_manifest["nodes"].append(
-                                {
-                                    "id": str(node["id"]),
-                                    "type": "static",
-                                    "x": int(node["x"]),
-                                    "y": int(node["y"]),
-                                    "width": int(node["width"]),
-                                    "height": int(node["height"]),
-                                    "file": capture_node_asset(
-                                        page,
-                                        temp_dir,
-                                        args.root_selector,
-                                        root_box,
-                                        page_id,
-                                        page_folder,
-                                        node,
-                                        static_path,
-                                    ),
-                                }
-                            )
-                            continue
-
-                        if node_type == "image":
-                            image_dir = ensure_dir(page_images_dir / sanitize_name(str(node["id"])))
-                            image_path = image_dir / "current.png"
-                            page_manifest["nodes"].append(
-                                {
-                                    "id": str(node["id"]),
-                                    "type": "image",
-                                    "bind": str(node.get("bind") or ""),
-                                    "image_type": str(node.get("imageType") or ""),
-                                    "x": int(node["x"]),
-                                    "y": int(node["y"]),
-                                    "width": int(node["width"]),
-                                    "height": int(node["height"]),
-                                    "file": capture_node_asset(
-                                        page,
-                                        temp_dir,
-                                        args.root_selector,
-                                        root_box,
-                                        page_id,
-                                        page_folder,
-                                        node,
-                                        image_path,
-                                    ),
-                                }
-                            )
-                            continue
-
-                        if node_type == "indicator":
-                            indicator_states = list(node.get("states") or [])
-                            if not indicator_states:
-                                indicator_states = ["normal"]
-                            indicator_dir = ensure_dir(page_indicators_dir / sanitize_name(str(node["id"])))
-                            state_files: dict[str, str] = {}
-                            for state_name in indicator_states:
-                                state_path = indicator_dir / f"{sanitize_name(state_name)}.png"
-                                state_files[state_name] = capture_node_asset(
-                                    page,
-                                    temp_dir,
-                                    args.root_selector,
-                                    root_box,
-                                    page_id,
-                                    page_folder,
-                                    node,
-                                    state_path,
-                                    state_name,
-                                )
-                            page_manifest["nodes"].append(
-                                {
-                                    "id": str(node["id"]),
-                                    "type": "indicator",
-                                    "bind": str(node.get("bind") or ""),
-                                    "indicator_type": str(node.get("indicatorType") or ""),
-                                    "x": int(node["x"]),
-                                    "y": int(node["y"]),
-                                    "width": int(node["width"]),
-                                    "height": int(node["height"]),
-                                    "states": state_files,
-                                }
-                            )
-                            continue
-
-                        if node_type == "container":
-                            page_manifest["nodes"].append(build_region_manifest(node, node_type))
-                            continue
-
-                        raise RuntimeError(f"Unsupported data-export-node type: {node_type}")
-
-                    manifest["pages"].append(page_manifest)
-
-                if glyph_sets:
-                    set_mode(page, "__export-transparent", "__export-glyph-capture")
-                    page.wait_for_timeout(80)
+                with TemporaryDirectory() as temp_dir_name:
+                    temp_dir = Path(temp_dir_name)
                     for glyph_set_name, glyph_info in glyph_sets.items():
-                        font_dir = prepare_dir(glyphs_dir / sanitize_name(glyph_set_name))
                         chars = sorted(glyph_info["chars"])
                         manifest["glyph_sets"][glyph_set_name] = {
                             "font_token": str(glyph_info.get("font_token") or ""),
@@ -962,7 +1030,8 @@ def main() -> int:
                             glyph = render_single_glyph(page, dict(glyph_info["style_snapshot"]), char)
                             char_code = int(glyph["charCode"])
                             char_name = glyph_char_name(char)
-                            glyph_path = font_dir / f"ascii_{char_code:03d}_{char_name}.png"
+                            fname = f"glyph_{sanitize_name(glyph_set_name)}_ascii_{char_code:03d}_{char_name}.png"
+                            glyph_path = assets_dir / fname
                             glyph_raw_path = temp_dir / f"{sanitize_name(glyph_set_name)}-{char_code:03d}.png"
                             page.screenshot(
                                 path=str(glyph_raw_path),
@@ -974,26 +1043,39 @@ def main() -> int:
                                 },
                             )
                             convert_black_bg_to_alpha(glyph_raw_path, glyph_path)
-                            manifest["glyph_sets"][glyph_set_name]["chars"].append(
-                                {
-                                    "char": char,
-                                    "char_code": char_code,
-                                    "width": int(glyph["width"]),
-                                    "height": int(glyph["height"]),
-                                    "file": str(glyph_path),
-                                }
-                            )
+                            manifest["glyph_sets"][glyph_set_name]["chars"].append({
+                                "char": char,
+                                "char_code": char_code,
+                                "width": int(glyph["width"]),
+                                "height": int(glyph["height"]),
+                                "file": str(glyph_path),
+                            })
                     remove_glyph_stage(page)
+                context.close()
 
-            context.close()
-            browser.close()
+    # Set screen from first page
+    if manifest["pages"]:
+        first_source = manifest["pages"][0].get("source_html", "")
+        for p in html_paths:
+            if str(p) == first_source:
+                # Read screen size from first page's base image
+                first_base = manifest["pages"][0]["files"]["base"]
+                with Image.open(first_base) as img:
+                    manifest["screen"] = {"width": img.width, "height": img.height}
+                break
+        if "width" not in manifest["screen"]:
+            with Image.open(manifest["pages"][0]["files"]["base"]) as img:
+                manifest["screen"] = {"width": img.width, "height": img.height}
 
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    print(f"Source: {html_path}")
+    total_controls = sum(len(s) for s in seen_controls.values())
+    unique_controls = len(seen_controls)
+    print(f"Sources: {len(html_paths)} HTML file(s)")
     print(f"Output: {output_dir}")
     print(f"Pages: {len(manifest['pages'])}")
+    print(f"Controls: {total_controls} unique signatures ({sum(len(e) for e in seen_controls.values())} total entries)")
     print(f"Glyph sets: {', '.join(manifest['glyph_sets'].keys())}")
     print(f"Manifest: {manifest_path}")
     return 0
