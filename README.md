@@ -1,12 +1,12 @@
 # didi-skills
 
-个人 Agent Skills 仓库。
+个人 Agent Skills 仓库，遵循 [.agents](https://agents.md) 目录约定组织，可同时被多种 AI Agent 工具使用。
 
-Skill（技能）是一个包含指令、参考资料、脚本和资源的文件夹，AI Agent（如 ZCode / Claude Code）在遇到匹配任务时动态加载，从而在专项任务上表现更好。本仓库用于沉淀和版本化管理我自己编写、日常会复用的 skills。
+Skill（技能）是一个包含指令、参考资料、脚本和资源的文件夹（核心是 `SKILL.md`），AI Agent 在遇到匹配任务时动态加载，从而在专项任务上表现更好。本仓库用于沉淀和版本化管理我自己编写、日常会复用的 skills。
 
 ## 当前包含的 Skills
 
-### [wechat-miniprogram-automation](wechat-miniprogram-automation/)
+### [wechat-miniprogram-automation](.agents/skills/wechat-miniprogram-automation/)
 
 微信小程序自动化联调。基于微信开发者工具自带的 `wechatide` CLI（v0.3.x 起内置），对模拟器做真实操作：刷新重编译、截图验证 UI、页面导航、运行时执行 JS、读写页面 data、调用页面方法、mock/恢复 wx API、grep console/network 日志。
 
@@ -14,7 +14,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 - 附带实测踩坑记录（tab 切换、数组参数、浮层点击、mock 恢复等 8 条）
 - 平台：Windows（Git Bash）
 
-### [embedded-ui-prototype-generator](embedded-ui-prototype-generator/)
+### [embedded-ui-prototype-generator](.agents/skills/embedded-ui-prototype-generator/)
 
 嵌入式 UI 原型生成，符合 Embedded Export Spec v2。用于新建或修改单页/多页导航界面，生成带 `data-ui-root`、`data-ui-page`、`data-ui-layer`、`data-export-node` 语义标记的 HTML 原型页面，为后续稳定切片导出做准备。
 
@@ -22,11 +22,11 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 - 只生成 v2 结构，不保留旧格式写法
 - 配套 `references/` 工作流文档与三套 HTML 模板（单页/多页/通用）
 
-### [embedded-ui-slice-exporter](embedded-ui-slice-exporter/)
+### [embedded-ui-slice-exporter](.agents/skills/embedded-ui-slice-exporter/)
 
 嵌入式 UI 切片导出，Embedded Export Spec v2 的另一半。把符合规范的原型页面切成嵌入式可直接使用的资源：按页面协议导出静态底图、控件状态图、字库、动态图像区域，并输出 manifest 坐标清单。
 
-- 与 [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) 配套使用：前者负责"生成符合规范的页面"，本 skill 负责"导出"
+- 与 [embedded-ui-prototype-generator](.agents/skills/embedded-ui-prototype-generator/) 配套使用：前者负责"生成符合规范的页面"，本 skill 负责"导出"
 - 提供 `scripts/slice_ui_assets.py` 切图脚本，通过 `--html` 指向目标页面
 - 只处理 v2 页面结构，不负责界面风格设计
 
@@ -34,11 +34,13 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 
 ```
 didi-skills/
-├── <skill-name>/              # 每个 skill 一个目录，目录名与 skill name 一致
-│   ├── SKILL.md               # 必须：YAML frontmatter（name + description）+ 正文指令
-│   ├── references/            # 可选：按需阅读的详细文档
-│   ├── scripts/               # 可选：可执行脚本
-│   └── assets/                # 可选：模板等静态资源
+├── .agents/
+│   └── skills/                # 跨工具通用的 skills 目录（.agents 约定）
+│       └── <skill-name>/      # 每个 skill 一个目录，目录名与 skill name 一致
+│           ├── SKILL.md       # 必须：YAML frontmatter（name + description）+ 正文指令
+│           ├── references/    # 可选：按需阅读的详细文档
+│           ├── scripts/       # 可选：可执行脚本
+│           └── assets/        # 可选：模板等静态资源
 ├── README.md
 ├── .gitignore
 └── .gitattributes
@@ -46,21 +48,38 @@ didi-skills/
 
 ## 安装使用
 
-把需要的 skill 目录复制（或软链）到 Agent 的 skills 目录即可，例如：
+各 Agent 工具读取 skills 的目录不同。推荐把本仓库克隆到本地，再为每个工具建立软链或复制，一份 skills 多工具共享：
 
 ```bash
-# ZCode 用户级 skills
-cp -r embedded-ui-prototype-generator ~/.zcode/skills/
-
-# Claude Code 用户级 skills
-cp -r wechat-miniprogram-automation ~/.claude/skills/
+git clone <本仓库地址> ~/didi-skills
 ```
+
+| Agent 工具 | 用户级 skills 目录 | 安装方式 |
+| --- | --- | --- |
+| 通用（.agents 约定） | `~/.agents/skills/` | 软链或复制 `.agents/skills/<skill-name>` |
+| ZCode | `~/.zcode/skills/` | 同上 |
+| Claude Code | `~/.claude/skills/` | 同上 |
+| Codex CLI | `~/.codex/skills/`（视版本） | 同上 |
+
+Windows（管理员或开发者模式的 PowerShell）示例：
+
+```powershell
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.zcode\skills\wechat-miniprogram-automation" -Target "$HOME\didi-skills\.agents\skills\wechat-miniprogram-automation"
+```
+
+macOS / Linux 示例：
+
+```bash
+ln -s ~/didi-skills/.agents/skills/wechat-miniprogram-automation ~/.zcode/skills/wechat-miniprogram-automation
+```
+
+项目级使用时，把 skill 复制或软链到项目的 `.agents/skills/`（或对应工具的项目级 skills 目录）即可随项目分发。
 
 两个 embedded-ui skill 有依赖关系，建议一起安装。
 
 ## 新增 Skill
 
-1. 根目录新建 `<skill-name>/`，目录名与 frontmatter 里的 `name` 保持一致。
+1. 在 `.agents/skills/` 下新建 `<skill-name>/`，目录名与 frontmatter 里的 `name` 保持一致。
 2. 编写 `SKILL.md`：frontmatter 必须包含 `name` 和 `description`；`description` 要写清"做什么 + 什么时候该触发"，这直接决定 Agent 能否正确选中这个 skill。
 3. 详细内容放 `references/`（SKILL.md 保持精炼，Agent 按需加载），脚本放 `scripts/`，模板放 `assets/`。
 4. 新 skill 完成后更新本 README 的「当前包含的 Skills」一节，并提交。
@@ -68,3 +87,4 @@ cp -r wechat-miniprogram-automation ~/.claude/skills/
 ## 说明
 
 - 本仓库为个人使用沉淀，skills 中的路径、工具版本（如微信开发者工具 v0.3.x CLI）以本人实际环境为准，使用前请自行验证。
+- 不同 Agent 工具对 skill frontmatter 字段的支持略有差异（如 `allowed-tools`、`model` 等扩展字段），本仓库的 skills 只依赖各工具通用的 `name` + `description`。
