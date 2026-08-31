@@ -1,0 +1,13 @@
+# 导出产物 / 临时文件
+dist/
+output/
+*.log
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多页原型模板 v2</title>
+  <style>
+    :root {
+      --screen-width: 800px;
+      --screen-height: 480px;
+      --line: rgba(208, 218, 228, 0.18);
+      --text: #f4f8fb;
+      --muted: #8fa1b0;
+      --accent: #69abff;
+      --green: #7fdaa0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(105, 171, 255, 0.1), transparent 40%),
+        #02060a;
+      color: var(--text);
+    }
+
+    .screen-frame {
+      position: relative;
+      width: var(--screen-width);
+      height: var(--screen-height);
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(214, 224, 233, 0.22);
+      background:
+        radial-gradient(circle at top center, rgba(160, 176, 194, 0.08), transparent 34%),
+        linear-gradient(180deg, #04080c 0%, #071018 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 18px 42px rgba(0, 0, 0, 0.38);
+    }
+
+    [data-ui-page] {
+      position: absolute;
+      inset: 0;
+    }
+
+    [data-ui-page][hidden] {
+      display: none !important;
+    }
+
+    [data-ui-layer] {
+      position: absolute;
+      inset: 0;
+    }
+
+    [data-ui-layer="background"] {
+      z-index: 1;
+    }
+
+    [data-ui-layer="content"] {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    [data-ui-layer="overlay"] {
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    [data-ui-layer="chrome"] {
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .header-shell {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 16px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .content-shell {
+      position: absolute;
+      inset: 88px 16px 92px 16px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-layout {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+    }
+
+    .page-layout::before {
+      content: "";
+      position: absolute;
+      left: 52%;
+      top: 16px;
+      bottom: 16px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(214, 224, 233, 0.24) 12%, rgba(214, 224, 233, 0.24) 88%, transparent 100%);
+    }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .metric-name {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .dynamic-value {
+      position: absolute;
+      left: 40px;
+      top: 128px;
+      font-size: 64px;
+      line-height: 0.9;
+      font-weight: 800;
+      letter-spacing: -2px;
+      font-variant-numeric: tabular-nums lining-nums;
+    }
+
+    .metric-unit {
+      position: absolute;
+      left: 176px;
+      top: 160px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .control-stack {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+      max-width: 180px;
+    }
+
+    .image-placeholder {
+      position: absolute;
+      right: 52px;
+      top: 112px;
+      width: 156px;
+      height: 156px;
+      border: 1px dashed rgba(214, 224, 233, 0.3);
+      border-radius: 12px;
+    }
+
+    .indicator-bar {
+      position: absolute;
+      right: 70px;
+      bottom: 132px;
+      width: 120px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(127, 218, 160, 0.24);
+      background: rgba(127, 218, 160, 0.12);
+      overflow: hidden;
+    }
+
+    .indicator-bar::before {
+      content: "";
+      display: block;
+      width: 45%;
+      height: 100%;
+      background: rgba(127, 218, 160, 0.92);
+    }
+
+    .indicator-bar.high::before {
+      width: 82%;
+    }
+
+    .chrome-footer {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-top: 1px solid var(--line);
+      pointer-events: none;
+    }
+
+    .nav-group {
+      display: flex;
+      gap: 12px;
+      pointer-events: auto;
+    }
+
+    .page-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .page-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(214, 224, 233, 0.28);
+    }
+
+    .page-dot.active {
+      background: rgba(105, 171, 255, 0.92);
+    }
+
+    .action-button {
+      min-width: 92px;
+      height: 40px;
+      padding: 0 16px;
+      border: 1px solid rgba(214, 224, 233, 0.22);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .action-button.pressed {
+      border-color: rgba(105, 171, 255, 0.46);
+      background: linear-gradient(180deg, rgba(105, 171, 255, 0.22), rgba(105, 171, 255, 0.08));
+    }
+
+    .action-button.active {
+      border-color: rgba(127, 218, 160, 0.44);
+      background: linear-gradient(180deg, rgba(127, 218, 160, 0.24), rgba(127, 218, 160, 0.08));
+    }
+
+    .action-button.disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div
+    class="screen-frame"
+    data-ui-root
+    data-ui-version="2"
+    data-screen-width="800"
+    data-screen-height="480"
+  >
+    <section
+      data-ui-page
+      data-page-id="system"
+      data-page-title="系统控制"
+      data-page-index="0"
+      data-page-active="true"
+    >
+      <div data-ui-layer="background">
+        <div class="header-shell">
+          <div class="header-title">多页模板 - 系统控制</div>
+          <div class="progress-label">PAGE 1 / 2</div>
+        </div>
+
+        <div class="content-shell">
+          <div class="page-layout">
+            <div class="panel">
+              <div class="section-label">静态标签</div>
+              <div class="metric-name">工作模式</div>
+              <div class="control-stack">
+                <div>自动 / 手动 / 三亚环境</div>
+                <div>左右箭头切页示例</div>
+                <div>当前页仍然可以有普通按钮控件</div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="section-label">图片区 / 预留区</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-ui-layer="content">
+        <div
+          class="image-placeholder"
+          data-export-node="image"
+          data-export-id="wifi-qrcode"
+          data-bind="wifi.qrcode"
+          data-image-type="qr"
+        ></div>
+      </div>
+
+      <div data-ui-layer="chrome">
+        <div class="chrome-footer">
+          <div class="nav-group">
+            <button
+              class="action-button disabled"
+              type="button"
+              data-export-node="control"
+              data-export-id="page-prev"
+              data-control-type="nav"
+              data-action="prev-page"
+              data-target-page="system"
+              data-states="normal,pressed,disabled"
+              data-state-class-pressed="pressed"
+              data-state-class-disabled="disabled"
+            >
+              上一页
+            </button>
+            <button
+              class="action-button"
+              type="button"
+              data-export-node="control"
+              data-export-id="page-next"
+              data-control-type="nav"
+              data-action="next-page"
+              data-target-page="oxygen"
+              data-states="normal,pressed"
+              data-state-class-pressed="pressed"
+            >
+              下一页
+            </button>
+          </div>
+
+          <div class="page-dots">
+            <div class="page-dot active"></div>
+            <div class="page-dot"></div>
+          </div>
+
+          <button
+            class="action-button active"
+            type="button"
+            data-export-node="control"
+            data-export-id="mode-auto"
+            data-control-type="tab"
+            data-action="mode-auto"
+            data-states="normal,pressed,active"
+            data-state-class-pressed="pressed"
+            data-state-class-active="active"
+          >
+            自动
+          </button>
+        </div>
+      </div>
+
+      <div data-ui-layer="overlay"></div>
+    </section>
+
+    <section
+      data-ui-page
+      data-page-id="oxygen"
+      data-page-title="氧浓度"
+      data-page-index="1"
+      data-page-active="false"
+      hidden
+    >
+      <div data-ui-layer="background">
+        <div class="header-shell">
+          <div class="header-title">多页模板 - 氧浓度</div>
+          <div class="progress-label">PAGE 2 / 2</div>
+        </div>
+
+        <div class="content-shell">
+          <div class="page-layout">
+            <div class="panel">
+              <div class="section-label">静态标签</div>
+              <div class="metric-name">氧浓度目标值</div>
+            </div>
+            <div class="panel">
+              <div class="section-label">状态指示</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div data-ui-layer="content">
+        <div
+          class="dynamic-value"
+          data-export-node="text"
+          data-export-id="oxygen-target"
+          data-bind="oxygen.target"
+          data-font-token="value-large"
+          data-glyph-set="digits-large"
+          data-format="int"
+        >
+          21
+        </div>
+
+        <div class="metric-unit">%</div>
+
+        <div
+          class="indicator-bar high"
+          data-export-node="indicator"
+          data-export-id="oxygen-level"
+          data-bind="oxygen.level"
+          data-indicator-type="level"
+          data-states="normal,high"
+          data-state-class-high="high"
+        ></div>
+      </div>
+
+      <div data-ui-layer="chrome">
+        <div class="chrome-footer">
+          <div class="nav-group">
+            <button
+              class="action-button"
+              type="button"
+              data-export-node="control"
+              data-export-id="page-prev"
+              data-control-type="nav"
+              data-action="prev-page"
+              data-target-page="system"
+              data-states="normal,pressed"
+              data-state-class-pressed="pressed"
+            >
+              上一页
+            </button>
+            <button
+              class="action-button disabled"
+              type="button"
+              data-export-node="control"
+              data-export-id="page-next"
+              data-control-type="nav"
+              data-action="next-page"
+              data-target-page="oxygen"
+              data-states="normal,pressed,disabled"
+              data-state-class-pressed="pressed"
+              data-state-class-disabled="disabled"
+            >
+              下一页
+            </button>
+          </div>
+
+          <div class="page-dots">
+            <div class="page-dot"></div>
+            <div class="page-dot active"></div>
+          </div>
+
+          <button
+            class="action-button"
+            type="button"
+            data-export-node="control"
+            data-export-id="confirm"
+            data-control-type="button"
+            data-action="confirm"
+            data-states="normal,pressed"
+            data-state-class-pressed="pressed"
+          >
+            确认
+          </button>
+        </div>
+      </div>
+
+      <div data-ui-layer="overlay"></div>
+    </section>
+  </div>
+
+  <script>
+    const pages = [
+      { id: "system", title: "系统控制", index: 0 },
+      { id: "oxygen", title: "氧浓度", index: 1 }
+    ];
+
+    function activatePage(pageId) {
+      document.querySelectorAll("[data-ui-page]").forEach((page) => {
+        const active = page.getAttribute("data-page-id") === pageId;
+        page.setAttribute("data-page-active", active ? "true" : "false");
+        page.hidden = !active;
+      });
+    }
+
+    window.__EMBEDDED_EXPORT__ = {
+      getPages() {
+        return pages;
+      },
+      activatePage
+    };
+  </script>
+</body>
+</html>

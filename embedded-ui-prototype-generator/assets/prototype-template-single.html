@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单页原型模板 v2</title>
+  <style>
+    :root {
+      --screen-width: 800px;
+      --screen-height: 480px;
+      --bg: #010409;
+      --panel: #071018;
+      --line: rgba(208, 218, 228, 0.18);
+      --text: #f5f8fb;
+      --muted: #9aabb8;
+      --blue: #69abff;
+      --green: #7fdaa0;
+      --amber: #e8bc62;
+      --digit-font: "Bahnschrift SemiCondensed", "Bahnschrift", "Arial Narrow", Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(102, 126, 150, 0.12), transparent 40%),
+        linear-gradient(180deg, #02050a 0%, #04070c 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
+    .screen-frame {
+      width: var(--screen-width);
+      height: var(--screen-height);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top center, rgba(160, 176, 194, 0.1), transparent 34%),
+        linear-gradient(180deg, #02050a 0%, #05090d 54%, #04080c 100%);
+      border: 1px solid rgba(214, 224, 233, 0.22);
+      border-radius: 28px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.09),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+        0 18px 42px rgba(0, 0, 0, 0.38);
+    }
+
+    .screen-frame::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 27px;
+      border: 1px solid rgba(255, 255, 255, 0.035);
+      pointer-events: none;
+    }
+
+    .screen-frame::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 8px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 80%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .page-view {
+      position: absolute;
+      inset: 0;
+    }
+
+    .page-layer {
+      position: absolute;
+      inset: 0;
+      padding: 16px;
+    }
+
+    .page-static-layer {
+      z-index: 1;
+    }
+
+    .page-content-layer {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .page-chrome-layer {
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .header-shell {
+      height: 48px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+    }
+
+    .static-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #f7fafc;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+    }
+
+    .page-stage {
+      position: absolute;
+      inset: 64px 18px 86px 18px;
+    }
+
+    .page-shell {
+      height: 100%;
+      display: grid;
+      grid-template-rows: 52px 1fr;
+    }
+
+    .page-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding: 0 6px 0 4px;
+    }
+
+    .page-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f2f7fb;
+      letter-spacing: 0.3px;
+    }
+
+    .page-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(222, 230, 237, 0.42);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .page-body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .line-layout {
+      height: 100%;
+      display: grid;
+    }
+
+    .line-layout.two {
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    .line-layout.three {
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    .line-row {
+      position: relative;
+      display: grid;
+      align-items: center;
+    }
+
+    .line-row + .line-row::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(214, 224, 233, 0.18), transparent);
+    }
+
+    .split-row {
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+    }
+
+    .row-title {
+      padding-left: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #eef4f8;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-shell {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 72px;
+      border-top: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0));
+    }
+
+    .button-strip {
+      display: grid;
+      gap: 12px;
+      pointer-events: auto;
+      align-items: center;
+    }
+
+    .button-strip.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .seg-button {
+      height: 52px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      border: 1px solid rgba(214, 224, 233, 0.24);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+      color: #e3ebf1;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .seg-button.active {
+      border-color: rgba(143, 222, 214, 0.34);
+      background: linear-gradient(180deg, rgba(143, 222, 214, 0.18), rgba(143, 222, 214, 0.06));
+      color: #e7faf6;
+    }
+
+    .metric-number {
+      font-family: var(--digit-font);
+      font-size: 48px;
+      font-weight: 800;
+      color: #f8fbfe;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen-frame" data-ui-root data-ui-version="2" data-screen-width="800" data-screen-height="480">
+    <section class="page-view" data-ui-page data-page-id="single_sample" data-page-title="单页示例" data-page-index="0" data-page-active="true">
+      
+      <!-- 背景/静态层 -->
+      <div class="page-layer page-static-layer" data-ui-layer="background">
+        <div class="header-shell">
+          <div class="static-title">单页结构示例</div>
+        </div>
+        <div class="page-stage">
+          <div class="page-shell">
+            <div class="page-head">
+              <div class="page-name">控制面板</div>
+              <div class="page-tag">CONTROL / PANEL</div>
+            </div>
+            <div class="page-body">
+              <!-- 横向竖向均匀布局的骨架 (2行) -->
+              <div class="line-layout two">
+                <div class="line-row split-row">
+                  <div class="row-title">示例功能一</div>
+                </div>
+                <div class="line-row split-row">
+                  <div class="row-title">示例功能二</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-shell"></div>
+      </div>
+
+      <!-- 动态内容层 -->
+      <div class="page-layer page-content-layer" data-ui-layer="content">
+        <div class="page-stage">
+          <div class="page-shell">
+            <div class="page-head"></div>
+            <div class="page-body">
+              <div class="line-layout two">
+                <div class="line-row split-row">
+                  <div></div>
+                  <div class="button-strip three">
+                    <button class="seg-button active" type="button" data-export-node="control" data-export-id="demo-opt-1" data-control-type="button" data-action="select" data-bind="demo" data-option-value="1">选项一</button>
+                    <button class="seg-button" type="button" data-export-node="control" data-export-id="demo-opt-2" data-control-type="button" data-action="select" data-bind="demo" data-option-value="2">选项二</button>
+                    <button class="seg-button" type="button" data-export-node="control" data-export-id="demo-opt-3" data-control-type="button" data-action="select" data-bind="demo" data-option-value="3">选项三</button>
+                  </div>
+                </div>
+                <div class="line-row split-row">
+                  <div></div>
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <div class="metric-number" data-export-node="text" data-export-id="demo-value" data-bind="demo.value" data-font-token="value-large" data-glyph-set="digits-large" data-format="int">85</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 交互/Chrome层 -->
+      <div class="page-layer page-chrome-layer" data-ui-layer="chrome">
+        <!-- 导航、悬浮操作等 -->
+      </div>
+
+    </section>
+  </div>
+
+  <script>
+    window.__EMBEDDED_EXPORT__ = {
+      getPages() {
+        return [
+          { id: "single_sample", title: "单页示例", index: 0 }
+        ];
+      },
+      activatePage(pageId) {
+        document.querySelectorAll("[data-ui-page]").forEach((page) => {
+          const active = page.getAttribute("data-page-id") === pageId;
+          page.setAttribute("data-page-active", active ? "true" : "false");
+          page.hidden = !active;
+        });
+      }
+    };
+  </script>
+</body>
+</html>

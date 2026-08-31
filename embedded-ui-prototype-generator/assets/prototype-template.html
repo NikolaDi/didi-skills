@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型模板入口</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(105, 171, 255, 0.1), transparent 40%),
+        #02060a;
+      color: #f4f8fb;
+    }
+
+    .panel {
+      width: min(760px, calc(100vw - 48px));
+      padding: 28px 32px;
+      border-radius: 20px;
+      border: 1px solid rgba(214, 224, 233, 0.2);
+      background:
+        radial-gradient(circle at top center, rgba(160, 176, 194, 0.08), transparent 34%),
+        linear-gradient(180deg, #04080c 0%, #071018 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 18px 42px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0;
+      color: rgba(244, 248, 251, 0.78);
+      line-height: 1.65;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid rgba(214, 224, 233, 0.16);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 14px;
+      color: #8fc5ff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(214, 224, 233, 0.14);
+      font-size: 13px;
+      color: rgba(244, 248, 251, 0.66);
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>原型模板入口</h1>
+    <p>当前模板已拆分为单页和多页两个 v2 模板。新页面请按页面结构选择对应模板作为起点，不要再直接从旧模板复制。</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>单页模板</h2>
+        <p>适合主界面、状态页、弹窗页、单页控制面板。包含 `text`、`image`、`indicator`、`control` 基础示例。</p>
+        <a href="./prototype-template-single.html">打开 `prototype-template-single.html`</a>
+      </div>
+
+      <div class="card">
+        <h2>多页模板</h2>
+        <p>适合左右箭头分页、导航页签、多屏切换界面。包含多页协议、导航控件和 `window.__EMBEDDED_EXPORT__` 示例。</p>
+        <a href="./prototype-template-multipage.html">打开 `prototype-template-multipage.html`</a>
+      </div>
+    </div>
+
+    <div class="note">
+      这只是模板入口页，不作为切片导出的页面样板使用。
+    </div>
+  </div>
+</body>
+</html>
