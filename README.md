@@ -6,29 +6,17 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 
 ## 当前包含的 Skills
 
-### [wechat-miniprogram-automation](wechat-miniprogram-automation/)
+| Skill | 一句话说明 | 平台 / 环境 |
+| --- | --- | --- |
+| [wechat-miniprogram-automation](wechat-miniprogram-automation/) | 用微信开发者工具自带 `wechatide` CLI 驱动小程序模拟器，做刷新编译、截图验证、运行时执行 JS、mock wx API 与日志抓取。 | Windows（Git Bash），微信开发者工具 v0.3.x CLI |
+| [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) | 按 Embedded Export Spec v2 生成带 `data-ui-root` / `data-ui-page` / `data-ui-layer` / `data-export-node` 语义标记的嵌入式 HTML 原型页面。 | 通用 |
+| [embedded-ui-slice-exporter](embedded-ui-slice-exporter/) | 把符合 v2 规范的原型页面切成底图、控件状态图、字库与动态图像区域，并输出 manifest 坐标清单。 | 通用（Python 脚本 `slice_ui_assets.py`） |
+| [esp-idf-dev](esp-idf-dev/) | 在 Windows Git Bash 下驱动 `idf.py` 完成 ESP32/ESP-IDF 固件的构建、烧录、串口监控与主机测试、OTA 打包。 | Windows（Git Bash），IDF v5.5 |
+| [md-industrial-pdf](md-industrial-pdf/) | 把 Markdown 技术文档渲染成带设计感封面与页脚工程图签的工业风 A4 PDF，并自动质检。 | Windows + Edge/Chrome，Python（`markdown`、`pymupdf`） |
 
-微信小程序自动化联调。基于微信开发者工具自带的 `wechatide` CLI（v0.3.x 起内置），对模拟器做真实操作：刷新重编译、截图验证 UI、页面导航、运行时执行 JS、读写页面 data、调用页面方法、mock/恢复 wx API、grep console/network 日志。
+各 skill 的详细指令、脚本与踩坑记录见对应目录下的 `SKILL.md` 与 `references/`。
 
-- 不依赖 `miniprogram-automator` 等第三方 SDK，不需要测试号，不改动项目代码
-- 附带实测踩坑记录（tab 切换、数组参数、浮层点击、mock 恢复等 8 条）
-- 平台：Windows（Git Bash）
-
-### [embedded-ui-prototype-generator](embedded-ui-prototype-generator/)
-
-嵌入式 UI 原型生成，符合 Embedded Export Spec v2。用于新建或修改单页/多页导航界面，生成带 `data-ui-root`、`data-ui-page`、`data-ui-layer`、`data-export-node` 语义标记的 HTML 原型页面，为后续稳定切片导出做准备。
-
-- 先问询确认页面尺寸、页数、导航协议、动态节点类型、绑定字段，再生成
-- 只生成 v2 结构，不保留旧格式写法
-- 配套 `references/` 工作流文档与三套 HTML 模板（单页/多页/通用）
-
-### [embedded-ui-slice-exporter](embedded-ui-slice-exporter/)
-
-嵌入式 UI 切片导出，Embedded Export Spec v2 的另一半。把符合规范的原型页面切成嵌入式可直接使用的资源：按页面协议导出静态底图、控件状态图、字库、动态图像区域，并输出 manifest 坐标清单。
-
-- 与 [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) 配套使用：前者负责"生成符合规范的页面"，本 skill 负责"导出"
-- 提供 `scripts/slice_ui_assets.py` 切图脚本，通过 `--html` 指向目标页面
-- 只处理 v2 页面结构，不负责界面风格设计
+> `embedded-ui-prototype-generator` 与 `embedded-ui-slice-exporter` 是配套关系：前者负责「生成符合规范的页面」，后者负责「导出」，建议一起安装。
 
 ## 仓库结构
 
@@ -40,6 +28,7 @@ didi-skills/
 │   ├── scripts/               # 可选：可执行脚本
 │   └── assets/                # 可选：模板等静态资源
 ├── README.md
+├── AGENTS.md             # 给 AI Agent 看的仓库约定（新增/修改 skill 时遵守）
 ├── .gitignore
 └── .gitattributes
 ```
@@ -71,16 +60,16 @@ macOS / Linux 示例：
 ln -s ~/didi-skills/wechat-miniprogram-automation ~/.zcode/skills/wechat-miniprogram-automation
 ```
 
-项目级使用时，把 skill 复制或软链到项目的 skills 目录（如 ``、`.claude/skills/`）即可随项目分发。
-
-两个 embedded-ui skill 有依赖关系，建议一起安装。
+项目级使用时，把 skill 复制或软链到项目的 skills 目录（如 `.agents/skills/`、`.claude/skills/`）即可随项目分发。
 
 ## 新增 Skill
 
 1. 在仓库根目录新建 `<skill-name>/`，目录名与 frontmatter 里的 `name` 保持一致。
 2. 编写 `SKILL.md`：frontmatter 必须包含 `name` 和 `description`；`description` 要写清"做什么 + 什么时候该触发"，这直接决定 Agent 能否正确选中这个 skill。
 3. 详细内容放 `references/`（SKILL.md 保持精炼，Agent 按需加载），脚本放 `scripts/`，模板放 `assets/`。
-4. 新 skill 完成后更新本 README 的「当前包含的 Skills」一节，并提交。
+4. 新 skill 完成后更新本 README 的「当前包含的 Skills」表格，并提交。
+
+更完整的编写约定见 [AGENTS.md](AGENTS.md)。
 
 ## 说明
 
