@@ -20,10 +20,12 @@ md-industrial-pdf 通用构建器：Markdown -> 工业风 PDF（封面 + 页脚�
 import argparse
 import base64
 import datetime
+import io
 import re
 import subprocess
 import sys
 import tempfile
+import warnings
 from pathlib import Path
 
 import fitz  # PyMuPDF
@@ -100,13 +102,40 @@ body {
     padding-top: 2mm;
 }
 
-.cover-main { margin-top: auto; margin-bottom: auto; padding-top: 20mm; }
+.cover-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10mm;
+}
+
+.cover-text { width: 100%; }
+
+.cover-product {
+    width: 72%;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-product img {
+    max-width: 100%;
+    max-height: 110mm;
+    object-fit: contain;
+    border: 0.5pt solid @MID@;
+    background: @LIGHT@;
+    padding: 3mm;
+}
 
 .cover-tag {
-    font-size: 10pt;
-    letter-spacing: 3pt;
+    font-size: 9.5pt;
+    letter-spacing: 2pt;
     color: @MID@;
     margin-bottom: 6mm;
+    line-height: 1.35;
 }
 
 .cover-title {
@@ -268,10 +297,12 @@ COVER_TMPL = """
     <div class="cover-doc-code">{doc_code}</div>
   </div>
   <div class="cover-main">
-    <div class="cover-tag">{tag}</div>
-    <div class="cover-title">{title}</div>
-    <div class="cover-subtitle">{subtitle}</div>
-    <div class="cover-bar"><i></i><i></i><i></i></div>
+    <div class="cover-text">
+      <div class="cover-tag">{tag}</div>
+      <div class="cover-title">{title}</div>
+      <div class="cover-subtitle">{subtitle}</div>
+      <div class="cover-bar"><i></i><i></i><i></i></div>
+    </div>{product_block}
   </div>
   <div class="cover-block">
     <table class="cover-info">
@@ -325,15 +356,53 @@ def strip_leading_meta(html: str) -> str:
 
 # --------------------------------------------------------------- 封面 ----
 
-def logo_data_uri(path: str) -> str:
+def logo_data_uri(path: str, max_edge: int = 1400) -> str:
+    """读取图片并返回 data URI。
+
+    位图在嵌入前会先检查尺寸：只要长边超过 ``max_edge`` 像素就等比缩小到
+    ``max_edge`` 并重编码，避免把超大原图字节直接塞进 HTML/PDF，导致文件
+    体积膨胀、渲染变慢。SVG 为矢量图，原样内嵌（不做栅格化缩放）。若运行
+    环境没有 Pillow，则跳过缩放、原样内嵌并给出告警。
+    """
     p = Path(path)
     ext = p.suffix.lower().lstrip(".")
     mime = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg",
             "svg": "image/svg+xml", "gif": "image/gif", "webp": "image/webp"}.get(ext)
     if mime is None:
-        raise SystemExit("不支持的 logo 格式: %s（支持 png/jpg/svg/gif/webp）" % ext)
-    data = base64.b64encode(p.read_bytes()).decode("ascii")
-    return "data:%s;base64,%s" % (mime, data)
+        raise SystemExit("不支持的图片格式: %s（支持 png/jpg/svg/gif/webp）" % ext)
+    if ext == "svg":
+        data = base64.b64encode(p.read_bytes()).decode("ascii")
+        return "data:%s;base64,%s" % (mime, data)
+    try:
+        from PIL import Image
+    except ImportError:
+        warnings.warn("未安装 Pillow，产品图/logo 将按原尺寸内嵌，不做缩放")
+        data = base64.b64encode(p.read_bytes()).decode("ascii")
+        return "data:%s;base64,%s" % (mime, data)
+    img = Image.open(p)
+    w, h = img.size
+    if max(w, h) > max_edge:
+        scale = max_edge / max(w, h)
+        new_w, new_h = max(1, round(w * scale)), max(1, round(h * scale))
+        try:
+            resample = Image.Resampling.LANCZOS
+        except AttributeError:  # Pillow < 9.1
+            resample = Image.ANTIALIAS
+        img = img.resize((new_w, new_h), resample)
+    fmt = {"png": "PNG", "jpg": "JPEG", "jpeg": "JPEG",
+           "webp": "WEBP", "gif": "PNG"}.get(ext, "PNG")
+    save_kwargs = {}
+    if fmt == "JPEG":
+        save_kwargs["quality"] = 85
+        if img.mode in ("RGBA", "P", "LA"):
+            img = img.convert("RGB")
+    elif fmt == "WEBP":
+        save_kwargs["quality"] = 85
+    out = io.BytesIO()
+    img.save(out, fmt, **save_kwargs)
+    out_mime = "image/png" if fmt == "PNG" else mime
+    data = base64.b64encode(out.getvalue()).decode("ascii")
+    return "data:%s;base64,%s" % (out_mime, data)
 
 
 def build_brand(vendor: str, logo: str) -> str:
@@ -346,7 +415,7 @@ def build_brand(vendor: str, logo: str) -> str:
     return NEUTRAL_MARK
 
 
-def build_cover(doc_code, lang, title, subtitle, rev, date, brand_html, metas):
+def build_cover(doc_code, lang, title, subtitle, rev, date, brand_html, metas, product_uri=""):
     if lang == "zh":
         tag = "TECHNICAL SPECIFICATION&nbsp;&nbsp;·&nbsp;&nbsp;技术规格书"
         rows = [
@@ -370,9 +439,14 @@ def build_cover(doc_code, lang, title, subtitle, rev, date, brand_html, metas):
     info_rows = "\n".join(
         '<tr><td class="k">%s</td><td class="v">%s</td></tr>' % (k, v) for k, v in rows
     )
+    if product_uri:
+        product_block = '\n    <div class="cover-product"><img src="%s" alt="product"></div>' % product_uri
+    else:
+        product_block = ""
     return COVER_TMPL.format(
         brand=brand_html, doc_code=doc_code, tag=tag, title=title,
         subtitle=subtitle, info_rows=info_rows, note=note,
+        product_block=product_block,
     )
 
 
@@ -491,10 +565,13 @@ def build_one(args, md_path: Path, browser: str) -> Path:
            .replace("@@FIRST_PAGE@@", "@page :first { margin: 0; }" if args.cover else ""))
 
     cover_html = ""
+    product_uri = ""
     if args.cover:
         brand = build_brand(args.vendor, args.logo)
+        if args.product_image:
+            product_uri = logo_data_uri(args.product_image)
         cover_html = build_cover(doc_code, lang, title, subtitle,
-                                 args.rev, args.date, brand, args.metas)
+                                 args.rev, args.date, brand, args.metas, product_uri)
 
     html = (
         '<!doctype html>\n<html lang="%s">\n<head><meta charset="utf-8">'
@@ -545,6 +622,7 @@ def main() -> int:
     ap.add_argument("--lang", choices=["auto", "zh", "en"], default="auto", help="封面语言")
     ap.add_argument("--vendor", default="", help="厂商名（缺省为中性封面）")
     ap.add_argument("--logo", default="", help="厂商 logo 图片路径（png/jpg/svg/gif/webp）")
+    ap.add_argument("--product-image", default="", help="封面产品图片路径（png/jpg/svg/gif/webp），置于标题下方居中；位图长边>1400px会自动等比缩放后内嵌")
     ap.add_argument("--rev", default="REV 1.0", help="版本号")
     ap.add_argument("--date", default=datetime.date.today().isoformat(), help="文档日期 YYYY-MM-DD")
     ap.add_argument("--meta", action="append", default=[], metavar="KEY=VALUE",
@@ -562,6 +640,8 @@ def main() -> int:
         raise SystemExit("--out 仅在单个输入文件时可用")
     if args.logo and not Path(args.logo).exists():
         raise SystemExit("logo 文件不存在: %s" % args.logo)
+    if args.product_image and not Path(args.product_image).exists():
+        raise SystemExit("product-image 文件不存在: %s" % args.product_image)
     for f in args.inputs:
         if not Path(f).exists():
             raise SystemExit("输入文件不存在: %s" % f)
