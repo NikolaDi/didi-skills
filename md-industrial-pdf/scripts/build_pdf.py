@@ -10,7 +10,7 @@ md-industrial-pdf 通用构建器：Markdown -> 工业风 PDF（封面 + 页脚�
     - 封面主标题自动取文档首个 H1；--title/--subtitle 可覆盖
     - 封面语言按标题是否含中文自动判断（--lang 可强制）
     - 厂商标识缺省为中性几何标识（--vendor/--logo 定制）
-    - 配色 #2C3440 / #8A95A5 / #E5E7EB（--colors 可覆盖）
+    - 配色 #3A506B / #5BC0BE / #CDEDF6（--colors 可覆盖）
     - 第 2 页起盖页脚图签，封面不盖、不计数
     - 构建后自动做程序化质检（--no-verify 跳过）
 
@@ -524,7 +524,7 @@ def build_one(args, md_path: Path, browser: str) -> Path:
 def parse_colors(s: str):
     parts = [p.strip().lstrip("#") for p in s.split(",")]
     if len(parts) != 3 or not all(re.fullmatch(r"[0-9A-Fa-f]{6}", p) for p in parts):
-        raise SystemExit('--colors 格式应为 "DARK,MID,LIGHT" 六位十六进制，如 2C3440,8A95A5,E5E7EB')
+        raise SystemExit('--colors 格式应为 "DARK,MID,LIGHT" 六位十六进制，如 3A506B,5BC0BE,CDEDF6')
     return ["#" + p.upper() for p in parts]
 
 
@@ -549,7 +549,7 @@ def main() -> int:
     ap.add_argument("--date", default=datetime.date.today().isoformat(), help="文档日期 YYYY-MM-DD")
     ap.add_argument("--meta", action="append", default=[], metavar="KEY=VALUE",
                     help="封面信息栏附加行，可重复")
-    ap.add_argument("--colors", type=parse_colors, default=parse_colors("2C3440,8A95A5,E5E7EB"),
+    ap.add_argument("--colors", type=parse_colors, default=parse_colors("3A506B,5BC0BE,CDEDF6"),
                     help='配色 "暗,中,浅" 十六进制（不带 #）')
     ap.add_argument("--edge", default="", help="浏览器路径（缺省自动查找 Edge/Chrome）")
     ap.add_argument("--no-cover", dest="cover", action="store_false", help="不生成封面")
