@@ -12,6 +12,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 | [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) | 按 Embedded Export Spec v2 生成带 `data-ui-root` / `data-ui-page` / `data-ui-layer` / `data-export-node` 语义标记的嵌入式 HTML 原型页面。 | 通用 |
 | [embedded-ui-slice-exporter](embedded-ui-slice-exporter/) | 把符合 v2 规范的原型页面切成底图、控件状态图、字库与动态图像区域，并输出 manifest 坐标清单。 | 通用（Python 脚本 `slice_ui_assets.py`） |
 | [esp-idf-dev](esp-idf-dev/) | 在 Windows Git Bash 下驱动 `idf.py` 完成 ESP32/ESP-IDF 固件的构建、烧录、串口监控与主机测试、OTA 打包。 | Windows（Git Bash），IDF v5.5 |
+| [iot-power](iot-power/) | 通过 Computer Use 操作合宙 IoT Power，连接 CC 系列设备、读取和连续监测电压/电流/功率/电量，或运行指定时长后保存监控数据。 | Windows，合宙 IoT Power 2.2.0.4 |
 | [md-industrial-pdf](md-industrial-pdf/) | 把 Markdown 技术文档渲染成带设计感封面与页脚工程图签的工业风 A4 PDF，并自动质检。 | Windows + Edge/Chrome，Python（`markdown`、`pymupdf`） |
 
 各 skill 的详细指令、脚本与踩坑记录见对应目录下的 `SKILL.md` 与 `references/`。
