@@ -1,6 +1,6 @@
 ---
 name: android-cli-debug
-description: 在 Windows 命令行（无 Android Studio）构建 APK 并部署到真机调试：SDK/Gradle 环境搭建、国内镜像加速、低内存机器 Gradle daemon OOM 诊断、adb 无线调试、小米 HyperOS 安装拦截（INSTALL_FAILED_USER_RESTRICTED）、Git Bash 下 adb 路径转换。当任务是「把 Android 工程编出包/装到手机/抓日志」且没有 IDE 时使用。不用于：应用功能本身的编码、iOS/Flutter/跨端框架、已由 Android Studio 接管的 IDE 内构建流程、非 Windows 主机（命令示例为 Git Bash）。
+description: 在 Windows 命令行（无 Android Studio）构建 APK 并部署到真机调试：SDK/Gradle 环境搭建、国内镜像加速、低内存机器 Gradle daemon OOM 诊断、adb 无线调试、小米 HyperOS 安装拦截（INSTALL_FAILED_USER_RESTRICTED）、Git Bash 下 adb 路径转换、adb 驱动 App UI 自动化（input tap 的 INJECT_EVENTS 权限、安全锁屏、uiautomator dump 取 Compose 坐标、息屏断连）。当任务是「把 Android 工程编出包/装到手机/抓日志/用 adb 自动操作 App 界面」且没有 IDE 时使用。不用于：应用功能本身的编码、iOS/Flutter/跨端框架、已由 Android Studio 接管的 IDE 内构建流程、非 Windows 主机（命令示例为 Git Bash）。
 ---
 
 # Android 命令行构建与真机调试（Windows）
@@ -68,7 +68,25 @@ adb -s <dev> install -r app-debug.apk
 adb -s <dev> shell am start -n <pkg>/.MainActivity && sleep 3 && adb -s <dev> shell pidof <pkg>
 ```
 
-## 4. 抓日志
+联调前调长手机息屏（息屏 = Wi-Fi 休眠 = 无线 ADB 断连），命令见 pitfalls §4。
+
+## 4. 驱动 App UI（联调自动化）
+
+替人点屏幕：自动重连、翻页、点按钮、截屏验收。命令只有四个——
+`input tap/swipe`、`input text`、`keyevent`、`uiautomator dump`——但有一串权限与
+坐标坑（HyperOS 需开「USB 调试（安全设置）」、安全锁屏 ADB 代解不了、截图估坐标
+必偏、Compose 节点解析要点、bottom sheet 关法），**完整坑链见 pitfalls §6**。
+
+最小可用流程：
+```bash
+adb shell dumpsys window | grep mCurrentFocus      # 先确认没锁屏（NotificationShade=锁着）
+adb shell uiautomator dump //sdcard//ui.xml        # 拿控件 bounds（Git Bash 双斜杠）
+adb exec-out cat //sdcard//ui.xml                  # 解析目标控件中心坐标
+adb shell input tap <x> <y>                        # dump 后立即点（bounds 会过期）
+adb exec-out screencap -p > shot.png               # 截屏验收
+```
+
+## 5. 抓日志
 
 ```bash
 adb -s <dev> logcat -c                                # 清缓冲
