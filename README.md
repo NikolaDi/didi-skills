@@ -15,6 +15,8 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 | [iot-power](iot-power/) | 通过 Computer Use 操作合宙 IoT Power，连接 CC 系列设备、读取和连续监测电压/电流/功率/电量，或运行指定时长后保存监控数据。 | Windows，合宙 IoT Power 2.2.0.4 |
 | [md-industrial-pdf](md-industrial-pdf/) | 把 Markdown 技术文档渲染成带设计感封面与页脚工程图签的工业风 A4 PDF，并自动质检。 | Windows + Edge/Chrome，Python（`markdown`、`pymupdf`） |
 | [android-cli-debug](android-cli-debug/) | 在 Windows 命令行（无 Android Studio）构建 APK 并部署真机调试：SDK/Gradle 环境搭建、国内镜像加速、低内存 daemon OOM 诊断、adb 无线调试、小米 HyperOS 安装拦截、Git Bash adb 路径坑。 | Windows（Git Bash），SDK 35 / Gradle 8.9 / platform-tools 37 |
+| [wch-ch59x-dev](wch-ch59x-dev/) | 在 Windows Git Bash 下构建、烧录、调试 WCH CH59x/CH591/CH592（RISC-V）固件，含 wlink 烧写与芯片高频硬件坑速查。 | Windows（Git Bash），MounRiver GCC + WCH-Link |
+| [usb-device-stack-debug](usb-device-stack-debug/) | 排查嵌入式 MCU 的 USB 设备枚举与 MSC/BOT 失败：无法识别设备、无盘符、读文件卡死。 | 通用（MCU 侧 USB 设备栈） |
 
 各 skill 的详细指令、脚本与踩坑记录见对应目录下的 `SKILL.md` 与 `references/`。
 
