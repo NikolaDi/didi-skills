@@ -17,6 +17,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 | [android-cli-debug](android-cli-debug/) | 在 Windows 命令行（无 Android Studio）构建 APK 并部署真机调试：SDK/Gradle 环境搭建、国内镜像加速、低内存 daemon OOM 诊断、adb 无线调试、小米 HyperOS 安装拦截、Git Bash adb 路径坑。 | Windows（Git Bash），SDK 35 / Gradle 8.9 / platform-tools 37 |
 | [wch-ch59x-dev](wch-ch59x-dev/) | 在 Windows Git Bash 下构建、烧录、调试 WCH CH59x/CH591/CH592（RISC-V）固件，含 wlink 烧写与芯片高频硬件坑速查。 | Windows（Git Bash），MounRiver GCC + WCH-Link |
 | [usb-device-stack-debug](usb-device-stack-debug/) | 排查嵌入式 MCU 的 USB 设备枚举与 MSC/BOT 失败：无法识别设备、无盘符、读文件卡死。 | 通用（MCU 侧 USB 设备栈） |
+| [gitee-release-platform](gitee-release-platform/) | 把 Gitee 公开仓库当 App 发布平台：Release/tag/附件三方契约、后端检查接口透出、版本串一致性升级判断与自包含上传脚本，含 Gitee API 实测坑速查。 | 通用（Bash+curl+Python，服务端参考实现为 Django/DRF） |
 
 各 skill 的详细指令、脚本与踩坑记录见对应目录下的 `SKILL.md` 与 `references/`。
 
