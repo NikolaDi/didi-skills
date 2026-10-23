@@ -8,7 +8,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 
 | Skill | 一句话说明 | 平台 / 环境 |
 | --- | --- | --- |
-| [circuit-to-notebook-export](circuit-to-notebook-export/) | 将电路原理图图片或 PDF 整理为结构化电路数据、SVG 原理图、HTML 方案笔记、知识地图和模型使用说明。 | 通用 |
+| [circuit-to-notebook](circuit-to-notebook/) | 将电路图片或 PDF 整理为方案笔记与配套资料，每次询问导出目录，按方案归档并维护汇总索引。 | 通用 |
 | [wechat-miniprogram-automation](wechat-miniprogram-automation/) | 用微信开发者工具自带 `wechatide` CLI 驱动小程序模拟器，做刷新编译、截图验证、运行时执行 JS、mock wx API 与日志抓取。 | Windows（Git Bash），微信开发者工具 v0.3.x CLI |
 | [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) | 按 Embedded Export Spec v2 生成带 `data-ui-root` / `data-ui-page` / `data-ui-layer` / `data-export-node` 语义标记的嵌入式 HTML 原型页面。 | 通用 |
 | [embedded-ui-slice-exporter](embedded-ui-slice-exporter/) | 把符合 v2 规范的原型页面切成底图、控件状态图、字库与动态图像区域，并输出 manifest 坐标清单。 | 通用（Python 脚本 `slice_ui_assets.py`） |
