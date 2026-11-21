@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rigol-dho900-mcp"
+version = "0.1.0"
+description = "RIGOL DHO900 系列示波器 MCP 服务器：SCPI 控制、波形读取、截图与自动测量"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["mcp>=1.2.0"]
+
+[project.optional-dependencies]
+visa = ["pyvisa>=1.14", "pyvisa-py>=0.7"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+rigol-dho900-mcp = "rigol_dho900_mcp.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,16 +1,31 @@
-# 发现服务与调用
+# 安装与调用
 
-- **宿主已提供工具。** 搜索服务名 `rigol-dho900` 或工具 `get_waveform`。已有会话用 `get_identity`；首次用 `connect(resource=…)` 或由服务端读取 `DHO900_RESOURCE`，核对返回的实际资源和型号。已有会话可能被复用，即使传入新地址也须核对返回值。可用工具以宿主发现结果为准。
-- **宿主未提供工具。** 用已能导入 `mcp` 与 `rigol_dho900_mcp` 的 Python 执行 `scripts/scope_mcp.py`。调用器启动同一台机上的 MCP 服务并经 stdio 发起工具调用，一批请求共用同一会话。它不需要改客户端配置。仅在宿主支持执行本地脚本且当前任务允许访问仪器时使用；已注册服务若被明确禁用或拒绝权限，应报告原因。
-- **设备地址。** 优先用本轮指定资源或 `DHO900_RESOURCE`。LAN 可用已知 IP 或 IP:端口，USB 使用完整 VISA 资源名。有 PyVISA 和可用的 VISA 后端时，调用器可自动选择唯一的 RIGOL USB 资源；多台时列出候选，不扫描局域网。连接后按 `*IDN?` 核对 DHO900 型号。
+将完整的 `rigol-dho900-scope/` 复制或链接到宿主的 skills 目录，保留同级的 `scripts/`、`mcp/` 和 `references/`。默认调用器按自身路径启动随包源码，可以从任意工作目录执行。
 
-以下命令在**安装后的 skill 目录**运行。第一行只握手及列工具，不访问示波器；第二行在已授权测量时读取 CH1。Windows PowerShell 可通过标准输入传 JSON，避免引号被命令行吞掉。
+## 首次准备 Python
+
+需要 Python 3.10 或以上及 MCP SDK。以下 PowerShell 示例从**已安装的 skill 根目录**执行，使用独立虚拟环境；当前解释器已具备依赖时可直接运行调用器。
 
 ```powershell
-python scripts/scope_mcp.py --list
-'[{"tool":"measure","arguments":{"item":"VAVG","source":"CH1"}}]' | python scripts/scope_mcp.py
+$venv = Join-Path $env:LOCALAPPDATA 'didi-skills/venvs/rigol-dho900'
+python -m venv $venv
+$py = Join-Path $venv 'Scripts/python.exe'
+& $py -m pip install ./mcp
+& $py scripts/scope_mcp.py --list
 ```
 
-可通过 `--resource` 显式选定仪器。每个请求均为实际 MCP 工具名及参数，结果按行输出。截图传入明确的 `save_path`，大波形用 `csv_path` 或 `export_waveform_csv`。需要根据 WAIT/STOP 决定何时继续时，分步读状态并判断；不要把布防和 RAW 读取无条件放进同一个请求列表。
+USB 或 VXI-11 用户将安装项换成 `"./mcp[visa]"`，并使用本机可用的 VISA 后端与设备驱动。LAN 原生 socket 只需基本安装。Linux/macOS 使用虚拟环境的 `bin/python`。首次安装依赖需要软件源或本地 wheel 缓存。升级时更新整个 skill 目录；依赖发生变化时重新执行对应的安装命令，常驻服务需重新启动。
 
-本机维护的服务源码在 `E:\project\00-ai\rigol_dho900_mcp`。若服务器未安装，可用已有含 MCP SDK 的解释器，把服务的 `src` 加入当前进程的 `PYTHONPATH`。USB 还需 PyVISA 和已工作的 VISA 后端。本台架 Python 3.11 已能导入 MCP 服务，已有 PyVISA 位于 `E:\work\12-mppt-60a\code\mppt\build\rigol-mcp-deps`，需要时将该目录加入同一进程的 `PYTHONPATH`。其他电脑按其实际部署选择解释器与地址。缺少服务、依赖或设备时说明缺哪一项；安装 skill 本身不安装驱动或服务器。
+## 调用
+
+`--list` 只进行 stdio 握手和工具发现。读 CH1 直流均值时，用本轮指定地址替换示例地址：
+
+```powershell
+'[{"tool":"measure","arguments":{"item":"VAVG","source":"CH1"}}]' | & $py scripts/scope_mcp.py --resource 192.168.1.100
+```
+
+调用器优先使用 `--resource`，其次取 `DHO900_RESOURCE`。LAN 支持 IP 或 IP:端口；USB 使用完整 VISA 资源名。两者均未指定时，调用器尝试枚举 RIGOL USB 设备，发现多台时列出候选。连接后核对 `*IDN?` 型号。一批 JSON 请求共用一次会话，逐项串行调用，结束后断开。截图传入 `save_path`，大波形用 `csv_path` 或 `export_waveform_csv`。单次瞬态先等自然 STOP，再读取 RAW。
+
+## 宿主已有原生 MCP 工具
+
+可将宿主的 stdio 命令指向上述虚拟环境的 Python，参数为**安装后** `mcp/serve.py` 的绝对路径。仅在确认服务已指向本份 skill 后复用已有工具和会话。首次调用 `connect(resource=…)` 时核对实际资源和型号，已连接的会话可能继续复用之前的仪器。宿主明确禁用仪器访问时遵循其权限设置。

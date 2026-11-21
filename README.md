@@ -8,7 +8,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 
 | Skill | 一句话说明 | 平台 / 环境 |
 | --- | --- | --- |
-| [rigol-dho900-scope](rigol-dho900-scope/) | 通过已有 RIGOL MCP 测量通道、抓取屏幕或冻结波形并导出；支持宿主工具调用和本地 stdio。 | DHO914/S、DHO924/S，USB VISA 或 LAN |
+| [rigol-dho900-scope](rigol-dho900-scope/) | 通过随包 MCP 测量通道、截图并导出冻结波形；安装与调用见[连接说明](rigol-dho900-scope/references/connection.md)。 | DHO914/S、DHO924/S，USB VISA 或 LAN |
 | [circuit-to-notebook](circuit-to-notebook/) | 将电路图片或 PDF 整理为方案笔记与配套资料，每次询问导出目录，按方案归档并维护汇总索引。 | 通用 |
 | [wechat-miniprogram-automation](wechat-miniprogram-automation/) | 用微信开发者工具自带 `wechatide` CLI 驱动小程序模拟器，做刷新编译、截图验证、运行时执行 JS、mock wx API 与日志抓取。 | Windows（Git Bash），微信开发者工具 v0.3.x CLI |
 | [embedded-ui-prototype-generator](embedded-ui-prototype-generator/) | 按 Embedded Export Spec v2 生成带 `data-ui-root` / `data-ui-page` / `data-ui-layer` / `data-export-node` 语义标记的嵌入式 HTML 原型页面。 | 通用 |
@@ -33,6 +33,7 @@ didi-skills/
 │   ├── SKILL.md               # 必须：YAML frontmatter（name + description）+ 正文指令
 │   ├── references/            # 可选：按需阅读的详细文档
 │   ├── scripts/               # 可选：可执行脚本
+│   ├── mcp/                   # 可选：该 skill 随包交付的服务和离线测试
 │   └── assets/                # 可选：模板等静态资源
 ├── README.md
 ├── AGENTS.md             # 给 AI Agent 看的仓库约定（新增/修改 skill 时遵守）

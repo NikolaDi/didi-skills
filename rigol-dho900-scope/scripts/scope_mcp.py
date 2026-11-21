@@ -1,4 +1,4 @@
-"""宿主没有原生示波器工具时，通过本地 MCP stdio 会话串行调用。"""
+"""通过随 skill 交付的 MCP stdio 服务串行调用示波器工具。"""
 
 import argparse
 import asyncio
@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+from pathlib import Path
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -49,7 +50,8 @@ async def run(options, requests):
         resource = usb_resource()
     # 在 SDK 自带的进程环境之上，传递本机解释器和 VISA 所需的选项。
     keys = ("PYTHONPATH", "PYTHONUTF8", "PYTHONIOENCODING", "PYVISA_LIBRARY", "DHO900_TIMEOUT")
-    server = StdioServerParameters(command=sys.executable, args=["-m", "rigol_dho900_mcp"],
+    entry = Path(__file__).resolve().parents[1] / "mcp" / "serve.py"
+    server = StdioServerParameters(command=sys.executable, args=[str(entry)],
                                    env={k: os.environ[k] for k in keys if k in os.environ})
     async with stdio_client(server) as (reader, writer):
         async with ClientSession(reader, writer) as session:

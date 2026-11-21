@@ -5,7 +5,7 @@ description: 通过 RIGOL DHO900 MCP 操作 DHO914、DHO914S、DHO924、DHO924S�
 
 # RIGOL DHO900 示波器
 
-用户说「看一下 CH1 电压」或「用示波器抓卸载波形」时，按请求直接调用仪器工具。先发现宿主已注册的示波器 MCP（通常名为 `rigol-dho900`，前缀随客户端而异），按实际工具 schema 传参。若宿主未注册，而本机可执行脚本且已部署服务器，使用随 skill 安装的 [stdio 调用器](scripts/scope_mcp.py)。两条路径只用一条，已占用的仪器会话继续复用。连接地址、调用器示例及缺依赖时的处理见[连接说明](references/connection.md)。
+用户说「看一下 CH1 电压」或「用示波器抓卸载波形」时，默认用已安装 skill 的 [stdio 调用器](scripts/scope_mcp.py)启动随包服务。用 `--list` 可先核对工具。若宿主已经通过本份 skill 的 `mcp/serve.py` 建立会话，可直接复用。一次测量只用一个会话；目标仪器已被其他服务占用时先协调释放。Python 环境、资源地址和调用示例见[连接说明](references/connection.md)。
 
 1. **辨认目标。** 在有仪器操作授权的任务中，连接既定资源并检查返回的型号；多台设备时依据资源名或序列号选定。仅解释问题或准备离线方案时无需连接。涉及被测设备的接线、上电和触发条件遵循当前台架约定。
 2. **按请求选工具。** 查当前直流均值用 `measure(item="VAVG", source="CH1")`，峰峰值用 `VPP`，频率用 `FREQuency`。面板截图用 `get_screenshot(save_path=绝对路径)`。查看当前屏幕用 `get_waveform(source="CH1", mode="NORMal", data_format="WORD", points=1000)`。读取当前状态时保留现有量程、触发和 RUN/STOP；报告实际通道、单位、有效点数或读数。仪器无效哨兵、截幅或掉探头时，报出可疑读数并核对。

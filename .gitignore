@@ -8,6 +8,9 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+/rigol-dho900-scope/mcp/build/
+/rigol-dho900-scope/mcp/src/*.egg-info/
+/rigol-dho900-scope/mcp/.pytest_cache/
 
 # Node
 node_modules/

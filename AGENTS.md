@@ -6,7 +6,7 @@
 
 个人 Agent Skills 仓库，供多种 AI Agent 工具（CodeBuddy / Claude Code / Codex CLI 等）共享。
 
-本仓库**不是软件项目**：没有构建、依赖安装、测试套件或 CI。内容是 Markdown 指令文档 + 少量 Python/BAT 脚本 + HTML 模板。因此不要新建 `package.json`、`requirements.txt`、`Makefile` 或测试框架，除非被明确要求。
+仓库根目录只管理 skill 目录和索引。普通 skill 由 Markdown 指令、脚本和模板组成。明确随 skill 交付的 MCP 可在该 skill 内维护自己的依赖和离线测试，安装和验证均以该 skill 为单位。
 
 ## 目录约定
 
@@ -15,11 +15,14 @@
 ├── SKILL.md         # 必须：YAML frontmatter（name + description）+ 正文指令
 ├── references/      # 可选：按需加载的详细文档、踩坑记录
 ├── scripts/         # 可选：可执行脚本
+├── mcp/             # 可选：随 skill 维护的 MCP 服务
 └── assets/          # 可选：模板等静态资源
 ```
 
 - 目录名必须与 `SKILL.md` frontmatter 里的 `name` **完全一致**。
 - skill 目录只允许出现在仓库根目录，不要嵌套子目录分层。
+- 示波器服务以 `rigol-dho900-scope/mcp/` 为维护入口，`src/` 放仪器驱动与协议接口，`tests/` 放离线测试，`pyproject.toml` 声明包与依赖。提交源码与测试，虚拟环境和构建缓存留在仓库外。原独立目录保留作历史参考。
+- 示波器 skill 默认调用本目录随包服务。变更调用方式时，把整个 skill 复制到独立位置，验证能列出工具并对模拟仪器完成一次调用。驱动只操作示波器，单台仪器串行访问；保留短块报错和自然 STOP 后读取 RAW 的约定。
 
 ## 新增或修改 Skill 的规则
 
