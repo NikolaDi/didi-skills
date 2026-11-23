@@ -1,0 +1,10 @@
+{
+  "name": "yiyang-jlc-eda-bridge",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local EasyEDA API bridge for the yiyang-jlc-eda skill",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": { "bridge": "node scripts/bridge-server.mjs" },
+  "dependencies": { "ws": "8.21.3" }
+}

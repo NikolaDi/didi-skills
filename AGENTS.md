@@ -49,6 +49,7 @@
 
 ## 已知的 skill 依赖关系
 
+- `yiyang-jlc-eda` 负责嘉立创 EDA 专业版操作，通用设计规则由同级的 `hardware-design` 维护。前者随包保留连接、工程操作、接口速查及打包脚本；设计规则变更只维护在后者。
 - `embedded-ui-prototype-generator`（生成符合 Embedded Export Spec v2 的页面）→ `embedded-ui-slice-exporter`（切片导出）。改任一方时检查另一方是否受影响。
 
 ## 不要做的事
