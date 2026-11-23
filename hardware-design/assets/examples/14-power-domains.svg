@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700" role="img">
+<title>电源域、滤波与参考地</title>
+<desc>可编辑矢量原理图；用于布局与连接表达验证。</desc>
+<metadata id="circuit-model">{&quot;number&quot;: 14, &quot;title&quot;: &quot;电源域、滤波与参考地&quot;, &quot;pins&quot;: [{&quot;ref&quot;: &quot;FB1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 260, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_D&quot;}, {&quot;ref&quot;: &quot;FB1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 420, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_A&quot;}, {&quot;ref&quot;: &quot;C1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 160, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_D&quot;}, {&quot;ref&quot;: &quot;C1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 160, &quot;y&quot;: 320, &quot;net&quot;: &quot;DGND&quot;}, {&quot;ref&quot;: &quot;C2&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 560, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_A&quot;}, {&quot;ref&quot;: &quot;C2&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 560, &quot;y&quot;: 320, &quot;net&quot;: &quot;AGND&quot;}, {&quot;ref&quot;: &quot;C3&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 800, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_A&quot;}, {&quot;ref&quot;: &quot;C3&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 800, &quot;y&quot;: 320, &quot;net&quot;: &quot;AGND&quot;}, {&quot;ref&quot;: &quot;R0&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 420, &quot;y&quot;: 480, &quot;net&quot;: &quot;AGND&quot;}, {&quot;ref&quot;: &quot;R0&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 650, &quot;y&quot;: 480, &quot;net&quot;: &quot;DGND&quot;}], &quot;labels&quot;: [{&quot;x&quot;: 90, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_D&quot;}, {&quot;x&quot;: 970, &quot;y&quot;: 210, &quot;net&quot;: &quot;+3V3_A&quot;}, {&quot;x&quot;: 160, &quot;y&quot;: 320, &quot;net&quot;: &quot;DGND&quot;}, {&quot;x&quot;: 560, &quot;y&quot;: 320, &quot;net&quot;: &quot;AGND&quot;}, {&quot;x&quot;: 800, &quot;y&quot;: 320, &quot;net&quot;: &quot;AGND&quot;}, {&quot;x&quot;: 420, &quot;y&quot;: 480, &quot;net&quot;: &quot;AGND&quot;}, {&quot;x&quot;: 650, &quot;y&quot;: 480, &quot;net&quot;: &quot;DGND&quot;}], &quot;junctions&quot;: [[160, 210], [560, 210], [800, 210]], &quot;segments&quot;: [[[90, 210], [260, 210]], [[420, 210], [970, 210]]], &quot;texts&quot;: [{&quot;x&quot;: 44, &quot;y&quot;: 51, &quot;text&quot;: &quot;14  电源域、滤波与参考地&quot;, &quot;size&quot;: 28, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 82, &quot;text&quot;: &quot;串联滤波前后分网，同一电源域的并联支路有序对齐。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 674, &quot;text&quot;: &quot;通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 90, &quot;y&quot;: 198, &quot;text&quot;: &quot;+3V3_D&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 340.0, &quot;y&quot;: 185.0, &quot;text&quot;: &quot;FB1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 340.0, &quot;y&quot;: 244.0, &quot;text&quot;: &quot;滤波磁珠&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 970, &quot;y&quot;: 198, &quot;text&quot;: &quot;+3V3_A&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 184.0, &quot;y&quot;: 261.0, &quot;text&quot;: &quot;C1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 184.0, &quot;y&quot;: 285.0, &quot;text&quot;: &quot;输入旁路&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 160, &quot;y&quot;: 364, &quot;text&quot;: &quot;DGND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 584.0, &quot;y&quot;: 261.0, &quot;text&quot;: &quot;C2&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 584.0, &quot;y&quot;: 285.0, &quot;text&quot;: &quot;高频旁路&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 560, &quot;y&quot;: 364, &quot;text&quot;: &quot;AGND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 824.0, &quot;y&quot;: 261.0, &quot;text&quot;: &quot;C3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 824.0, &quot;y&quot;: 285.0, &quot;text&quot;: &quot;储能&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 800, &quot;y&quot;: 364, &quot;text&quot;: &quot;AGND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 250, &quot;y&quot;: 426, &quot;text&quot;: &quot;仅在设计明确规定时连接不同参考域&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 535.0, &quot;y&quot;: 455.0, &quot;text&quot;: &quot;R0&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 535.0, &quot;y&quot;: 514.0, &quot;text&quot;: &quot;0 Ω / 由设计决定&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 420, &quot;y&quot;: 524, &quot;text&quot;: &quot;AGND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 650, &quot;y&quot;: 524, &quot;text&quot;: &quot;DGND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 627, &quot;text&quot;: &quot;检查：滤波前后电源身份不同；旁路分组清楚；参考域连接位置明确。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 651, &quot;text&quot;: &quot;不为美观拆分地网；原理图上的分组不能替代 PCB 回流与布局设计。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}]}</metadata>
+<g font-family="Noto Sans CJK SC, sans-serif">
+<rect x="0" y="0" width="1120" height="700" fill="white" stroke="none" stroke-width="2"/>
+<text x="44" y="51" font-size="28" fill="#263747" text-anchor="start" font-weight="700">14  电源域、滤波与参考地</text>
+<text x="44" y="82" font-size="16" fill="#637586" text-anchor="start" font-weight="400">串联滤波前后分网，同一电源域的并联支路有序对齐。</text>
+<line x1="44" y1="104" x2="1076" y2="104" stroke="#b9c6ce" stroke-width="1"/>
+<line x1="44" y1="599" x2="1076" y2="599" stroke="#b9c6ce" stroke-width="1"/>
+<text x="44" y="674" font-size="14" fill="#637586" text-anchor="start" font-weight="400">通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计</text>
+<circle data-electrical="label" data-net="+3V3_D" cx="90" cy="210" r="0"/>
+<circle cx="90" cy="210" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="90" y="198" font-size="16" fill="#24518a" text-anchor="start" font-weight="400">+3V3_D</text>
+<polyline data-electrical="wire" points="90,210 260,210" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="FB1" data-pin="1" cx="260" cy="210" r="0"/>
+<circle data-electrical="pin" data-ref="FB1" data-pin="2" cx="420" cy="210" r="0"/>
+<line x1="260" y1="210" x2="317.0" y2="210.0" stroke="#263747" stroke-width="2"/>
+<rect x="317.0" y="201.0" width="46" height="18" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="363.0" y1="210.0" x2="420" y2="210" stroke="#263747" stroke-width="2"/>
+<text x="340.0" y="185.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">FB1</text>
+<text x="340.0" y="244.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">滤波磁珠</text>
+<polyline data-electrical="wire" points="420,210 970,210" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="+3V3_A" cx="970" cy="210" r="0"/>
+<circle cx="970" cy="210" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="970" y="198" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">+3V3_A</text>
+<circle data-electrical="pin" data-ref="C1" data-pin="1" cx="160" cy="210" r="0"/>
+<circle data-electrical="pin" data-ref="C1" data-pin="2" cx="160" cy="320" r="0"/>
+<line x1="160" y1="210" x2="160.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="160.0" y1="271.0" x2="160" y2="320" stroke="#263747" stroke-width="2"/>
+<line x1="143.0" y1="259.0" x2="177.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="143.0" y1="271.0" x2="177.0" y2="271.0" stroke="#263747" stroke-width="2"/>
+<text x="184.0" y="261.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C1</text>
+<text x="184.0" y="285.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">输入旁路</text>
+<circle data-electrical="label" data-net="DGND" cx="160" cy="320" r="0"/>
+<line x1="160" y1="320" x2="160" y2="332" stroke="#226850" stroke-width="2"/>
+<line x1="147" y1="332" x2="173" y2="332" stroke="#226850" stroke-width="1.8"/>
+<line x1="151" y1="338" x2="169" y2="338" stroke="#226850" stroke-width="1.8"/>
+<line x1="156" y1="344" x2="164" y2="344" stroke="#226850" stroke-width="1.8"/>
+<text x="160" y="364" font-size="14" fill="#24518a" text-anchor="middle" font-weight="400">DGND</text>
+<circle data-electrical="junction" cx="160" cy="210" r="3.7" fill="#226850"/>
+<circle data-electrical="pin" data-ref="C2" data-pin="1" cx="560" cy="210" r="0"/>
+<circle data-electrical="pin" data-ref="C2" data-pin="2" cx="560" cy="320" r="0"/>
+<line x1="560" y1="210" x2="560.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="560.0" y1="271.0" x2="560" y2="320" stroke="#263747" stroke-width="2"/>
+<line x1="543.0" y1="259.0" x2="577.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="543.0" y1="271.0" x2="577.0" y2="271.0" stroke="#263747" stroke-width="2"/>
+<text x="584.0" y="261.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C2</text>
+<text x="584.0" y="285.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">高频旁路</text>
+<circle data-electrical="label" data-net="AGND" cx="560" cy="320" r="0"/>
+<line x1="560" y1="320" x2="560" y2="332" stroke="#226850" stroke-width="2"/>
+<line x1="547" y1="332" x2="573" y2="332" stroke="#226850" stroke-width="1.8"/>
+<line x1="551" y1="338" x2="569" y2="338" stroke="#226850" stroke-width="1.8"/>
+<line x1="556" y1="344" x2="564" y2="344" stroke="#226850" stroke-width="1.8"/>
+<text x="560" y="364" font-size="14" fill="#24518a" text-anchor="middle" font-weight="400">AGND</text>
+<circle data-electrical="junction" cx="560" cy="210" r="3.7" fill="#226850"/>
+<circle data-electrical="pin" data-ref="C3" data-pin="1" cx="800" cy="210" r="0"/>
+<circle data-electrical="pin" data-ref="C3" data-pin="2" cx="800" cy="320" r="0"/>
+<line x1="800" y1="210" x2="800.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="800.0" y1="271.0" x2="800" y2="320" stroke="#263747" stroke-width="2"/>
+<line x1="783.0" y1="259.0" x2="817.0" y2="259.0" stroke="#263747" stroke-width="2"/>
+<line x1="783.0" y1="271.0" x2="817.0" y2="271.0" stroke="#263747" stroke-width="2"/>
+<text x="824.0" y="261.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C3</text>
+<text x="824.0" y="285.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">储能</text>
+<circle data-electrical="label" data-net="AGND" cx="800" cy="320" r="0"/>
+<line x1="800" y1="320" x2="800" y2="332" stroke="#226850" stroke-width="2"/>
+<line x1="787" y1="332" x2="813" y2="332" stroke="#226850" stroke-width="1.8"/>
+<line x1="791" y1="338" x2="809" y2="338" stroke="#226850" stroke-width="1.8"/>
+<line x1="796" y1="344" x2="804" y2="344" stroke="#226850" stroke-width="1.8"/>
+<text x="800" y="364" font-size="14" fill="#24518a" text-anchor="middle" font-weight="400">AGND</text>
+<circle data-electrical="junction" cx="800" cy="210" r="3.7" fill="#226850"/>
+<text x="250" y="426" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">仅在设计明确规定时连接不同参考域</text>
+<circle data-electrical="pin" data-ref="R0" data-pin="1" cx="420" cy="480" r="0"/>
+<circle data-electrical="pin" data-ref="R0" data-pin="2" cx="650" cy="480" r="0"/>
+<line x1="420" y1="480" x2="512.0" y2="480.0" stroke="#263747" stroke-width="2"/>
+<rect x="512.0" y="471.0" width="46" height="18" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="558.0" y1="480.0" x2="650" y2="480" stroke="#263747" stroke-width="2"/>
+<text x="535.0" y="455.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">R0</text>
+<text x="535.0" y="514.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">0 Ω / 由设计决定</text>
+<circle data-electrical="label" data-net="AGND" cx="420" cy="480" r="0"/>
+<line x1="420" y1="480" x2="420" y2="492" stroke="#226850" stroke-width="2"/>
+<line x1="407" y1="492" x2="433" y2="492" stroke="#226850" stroke-width="1.8"/>
+<line x1="411" y1="498" x2="429" y2="498" stroke="#226850" stroke-width="1.8"/>
+<line x1="416" y1="504" x2="424" y2="504" stroke="#226850" stroke-width="1.8"/>
+<text x="420" y="524" font-size="14" fill="#24518a" text-anchor="middle" font-weight="400">AGND</text>
+<circle data-electrical="label" data-net="DGND" cx="650" cy="480" r="0"/>
+<line x1="650" y1="480" x2="650" y2="492" stroke="#226850" stroke-width="2"/>
+<line x1="637" y1="492" x2="663" y2="492" stroke="#226850" stroke-width="1.8"/>
+<line x1="641" y1="498" x2="659" y2="498" stroke="#226850" stroke-width="1.8"/>
+<line x1="646" y1="504" x2="654" y2="504" stroke="#226850" stroke-width="1.8"/>
+<text x="650" y="524" font-size="14" fill="#24518a" text-anchor="middle" font-weight="400">DGND</text>
+<text x="44" y="627" font-size="16" fill="#263747" text-anchor="start" font-weight="400">检查：滤波前后电源身份不同；旁路分组清楚；参考域连接位置明确。</text>
+<text x="44" y="651" font-size="16" fill="#263747" text-anchor="start" font-weight="400">不为美观拆分地网；原理图上的分组不能替代 PCB 回流与布局设计。</text>
+</g>
+</svg>

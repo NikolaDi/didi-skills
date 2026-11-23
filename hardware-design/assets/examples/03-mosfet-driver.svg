@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700" role="img">
+<title>MOSFET：控制横向、功率纵向</title>
+<desc>可编辑矢量原理图；用于布局与连接表达验证。</desc>
+<metadata id="circuit-model">{&quot;number&quot;: 3, &quot;title&quot;: &quot;MOSFET：控制横向、功率纵向&quot;, &quot;pins&quot;: [{&quot;ref&quot;: &quot;Q1&quot;, &quot;pin&quot;: &quot;G&quot;, &quot;x&quot;: 505, &quot;y&quot;: 430, &quot;net&quot;: &quot;GATE&quot;}, {&quot;ref&quot;: &quot;Q1&quot;, &quot;pin&quot;: &quot;D&quot;, &quot;x&quot;: 590, &quot;y&quot;: 365, &quot;net&quot;: &quot;LOAD_N&quot;}, {&quot;ref&quot;: &quot;Q1&quot;, &quot;pin&quot;: &quot;S&quot;, &quot;x&quot;: 590, &quot;y&quot;: 495, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;L_LOAD&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 590, &quot;y&quot;: 200, &quot;net&quot;: &quot;VLOAD&quot;}, {&quot;ref&quot;: &quot;L_LOAD&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 590, &quot;y&quot;: 290, &quot;net&quot;: &quot;LOAD_N&quot;}, {&quot;ref&quot;: &quot;D_FREE&quot;, &quot;pin&quot;: &quot;A&quot;, &quot;x&quot;: 780, &quot;y&quot;: 330, &quot;net&quot;: &quot;LOAD_N&quot;}, {&quot;ref&quot;: &quot;D_FREE&quot;, &quot;pin&quot;: &quot;K&quot;, &quot;x&quot;: 780, &quot;y&quot;: 210, &quot;net&quot;: &quot;VLOAD&quot;}, {&quot;ref&quot;: &quot;R_G&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 180, &quot;y&quot;: 430, &quot;net&quot;: &quot;PWM&quot;}, {&quot;ref&quot;: &quot;R_G&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 320, &quot;y&quot;: 430, &quot;net&quot;: &quot;GATE&quot;}, {&quot;ref&quot;: &quot;R_GS&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 410, &quot;y&quot;: 430, &quot;net&quot;: &quot;GATE&quot;}, {&quot;ref&quot;: &quot;R_GS&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 410, &quot;y&quot;: 530, &quot;net&quot;: &quot;GND&quot;}], &quot;labels&quot;: [{&quot;x&quot;: 590, &quot;y&quot;: 160, &quot;net&quot;: &quot;VLOAD&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 430, &quot;net&quot;: &quot;PWM&quot;}, {&quot;x&quot;: 590, &quot;y&quot;: 530, &quot;net&quot;: &quot;GND&quot;}], &quot;junctions&quot;: [[590, 175], [590, 330], [410, 430], [590, 530]], &quot;segments&quot;: [[[590, 160], [590, 200]], [[590, 290], [590, 365]], [[780, 210], [780, 175]], [[780, 175], [590, 175]], [[780, 330], [590, 330]], [[100, 430], [180, 430]], [[320, 430], [505, 430]], [[410, 530], [590, 530]], [[590, 530], [590, 495]]], &quot;texts&quot;: [{&quot;x&quot;: 44, &quot;y&quot;: 51, &quot;text&quot;: &quot;03  MOSFET：控制横向、功率纵向&quot;, &quot;size&quot;: 28, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 82, &quot;text&quot;: &quot;门极电阻与下拉就地放置，负载及续流支路位于功率器件上方。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 674, &quot;text&quot;: &quot;通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 220, &quot;text&quot;: &quot;控制输入&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 830, &quot;y&quot;: 225, &quot;text&quot;: &quot;负载续流&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 525, &quot;y&quot;: 420, &quot;text&quot;: &quot;G&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 574, &quot;y&quot;: 382, &quot;text&quot;: &quot;D&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 574, &quot;y&quot;: 490, &quot;text&quot;: &quot;S&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 650, &quot;y&quot;: 422, &quot;text&quot;: &quot;Q1&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 650, &quot;y&quot;: 448, &quot;text&quot;: &quot;NMOS&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 590, &quot;y&quot;: 135, &quot;text&quot;: &quot;VLOAD&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 562, &quot;y&quot;: 240.0, &quot;text&quot;: &quot;L_LOAD&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 562, &quot;y&quot;: 267.0, &quot;text&quot;: &quot;感性负载&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 808.0, &quot;y&quot;: 275.0, &quot;text&quot;: &quot;D_FREE&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 830, &quot;y&quot;: 300, &quot;text&quot;: &quot;阴极 → VLOAD&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 830, &quot;y&quot;: 327, &quot;text&quot;: &quot;阳极 → LOAD_N&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 418, &quot;text&quot;: &quot;PWM&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 250.0, &quot;y&quot;: 405.0, &quot;text&quot;: &quot;R_G&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 250.0, &quot;y&quot;: 464.0, &quot;text&quot;: &quot;门极串联&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 386.0, &quot;y&quot;: 476.0, &quot;text&quot;: &quot;R_GS&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 386.0, &quot;y&quot;: 500.0, &quot;text&quot;: &quot;关断下拉&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 627, &quot;text&quot;: &quot;检查：G / D / S 靠近引脚；门极下拉回到源极所属参考地。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 651, &quot;text&quot;: &quot;续流支路跨接真实负载两端，控制网 GATE 与功率网 LOAD_N 保持分离。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}]}</metadata>
+<g font-family="Noto Sans CJK SC, sans-serif">
+<rect x="0" y="0" width="1120" height="700" fill="white" stroke="none" stroke-width="2"/>
+<text x="44" y="51" font-size="28" fill="#263747" text-anchor="start" font-weight="700">03  MOSFET：控制横向、功率纵向</text>
+<text x="44" y="82" font-size="16" fill="#637586" text-anchor="start" font-weight="400">门极电阻与下拉就地放置，负载及续流支路位于功率器件上方。</text>
+<line x1="44" y1="104" x2="1076" y2="104" stroke="#b9c6ce" stroke-width="1"/>
+<line x1="44" y1="599" x2="1076" y2="599" stroke="#b9c6ce" stroke-width="1"/>
+<text x="44" y="674" font-size="14" fill="#637586" text-anchor="start" font-weight="400">通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计</text>
+<text x="100" y="220" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">控制输入</text>
+<text x="830" y="225" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">负载续流</text>
+<line x1="505" y1="430" x2="545" y2="430" stroke="#263747" stroke-width="2"/>
+<line x1="545" y1="401" x2="545" y2="459" stroke="#263747" stroke-width="2"/>
+<line x1="558" y1="401" x2="558" y2="415" stroke="#263747" stroke-width="2"/>
+<line x1="558" y1="423" x2="558" y2="437" stroke="#263747" stroke-width="2"/>
+<line x1="558" y1="445" x2="558" y2="459" stroke="#263747" stroke-width="2"/>
+<polyline points="558,408 590,408 590,365" fill="none" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="558,452 590,452 590,495" fill="none" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<line x1="558" y1="430" x2="579" y2="430" stroke="#263747" stroke-width="2"/>
+<line x1="579" y1="430" x2="579" y2="452" stroke="#263747" stroke-width="2"/>
+<polygon points="560,430 569,425 569,435" fill="#263747" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="590,388 618,388 618,420" fill="none" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="618,440 618,472 590,472" fill="none" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="609,440 618,422 627,440" fill="white" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<line x1="607" y1="420" x2="629" y2="420" stroke="#263747" stroke-width="2"/>
+<text x="525" y="420" font-size="14" fill="#263747" text-anchor="start" font-weight="400">G</text>
+<text x="574" y="382" font-size="14" fill="#263747" text-anchor="end" font-weight="400">D</text>
+<text x="574" y="490" font-size="14" fill="#263747" text-anchor="end" font-weight="400">S</text>
+<text x="650" y="422" font-size="17" fill="#263747" text-anchor="start" font-weight="700">Q1</text>
+<text x="650" y="448" font-size="15" fill="#637586" text-anchor="start" font-weight="400">NMOS</text>
+<circle data-electrical="pin" data-ref="Q1" data-pin="G" cx="505" cy="430" r="0"/>
+<circle data-electrical="pin" data-ref="Q1" data-pin="D" cx="590" cy="365" r="0"/>
+<circle data-electrical="pin" data-ref="Q1" data-pin="S" cx="590" cy="495" r="0"/>
+<circle data-electrical="label" data-net="VLOAD" cx="590" cy="160" r="0"/>
+<line x1="590" y1="160" x2="590" y2="147" stroke="#226850" stroke-width="2"/>
+<line x1="580" y1="147" x2="600" y2="147" stroke="#226850" stroke-width="2"/>
+<text x="590" y="135" font-size="16" fill="#24518a" text-anchor="middle" font-weight="400">VLOAD</text>
+<polyline data-electrical="wire" points="590,160 590,200" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="L_LOAD" data-pin="1" cx="590" cy="200" r="0"/>
+<circle data-electrical="pin" data-ref="L_LOAD" data-pin="2" cx="590" cy="290" r="0"/>
+<line x1="590" y1="200" x2="590" y2="213.0" stroke="#263747" stroke-width="2"/>
+<line x1="590" y1="277.0" x2="590" y2="290" stroke="#263747" stroke-width="2"/>
+<path d="M 590 213.0 a 10 8 0 0 1 0 16 a 10 8 0 0 1 0 16 a 10 8 0 0 1 0 16 a 10 8 0 0 1 0 16" fill="none" stroke="#263747" stroke-width="2"/>
+<text x="562" y="240.0" font-size="17" fill="#263747" text-anchor="end" font-weight="400">L_LOAD</text>
+<text x="562" y="267.0" font-size="15" fill="#637586" text-anchor="end" font-weight="400">感性负载</text>
+<polyline data-electrical="wire" points="590,290 590,365" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="D_FREE" data-pin="A" cx="780" cy="330" r="0"/>
+<circle data-electrical="pin" data-ref="D_FREE" data-pin="K" cx="780" cy="210" r="0"/>
+<line x1="780" y1="330" x2="780.0" y2="284.0" stroke="#263747" stroke-width="2"/>
+<line x1="780.0" y1="256.0" x2="780" y2="210" stroke="#263747" stroke-width="2"/>
+<polygon points="767.0,284.0 780.0,258.0 793.0,284.0" fill="white" stroke="#263747" stroke-width="2" stroke-linejoin="round"/>
+<line x1="765.0" y1="256.0" x2="795.0" y2="256.0" stroke="#263747" stroke-width="2"/>
+<text x="808.0" y="275.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">D_FREE</text>
+<polyline data-electrical="wire" points="780,210 780,175 590,175" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="junction" cx="590" cy="175" r="3.7" fill="#226850"/>
+<polyline data-electrical="wire" points="780,330 590,330" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="junction" cx="590" cy="330" r="3.7" fill="#226850"/>
+<text x="830" y="300" font-size="15" fill="#637586" text-anchor="start" font-weight="400">阴极 → VLOAD</text>
+<text x="830" y="327" font-size="15" fill="#637586" text-anchor="start" font-weight="400">阳极 → LOAD_N</text>
+<circle data-electrical="label" data-net="PWM" cx="100" cy="430" r="0"/>
+<circle cx="100" cy="430" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="100" y="418" font-size="16" fill="#24518a" text-anchor="start" font-weight="400">PWM</text>
+<polyline data-electrical="wire" points="100,430 180,430" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="R_G" data-pin="1" cx="180" cy="430" r="0"/>
+<circle data-electrical="pin" data-ref="R_G" data-pin="2" cx="320" cy="430" r="0"/>
+<line x1="180" y1="430" x2="227.0" y2="430.0" stroke="#263747" stroke-width="2"/>
+<rect x="227.0" y="421.0" width="46" height="18" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="273.0" y1="430.0" x2="320" y2="430" stroke="#263747" stroke-width="2"/>
+<text x="250.0" y="405.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">R_G</text>
+<text x="250.0" y="464.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">门极串联</text>
+<polyline data-electrical="wire" points="320,430 505,430" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="junction" cx="410" cy="430" r="3.7" fill="#226850"/>
+<circle data-electrical="pin" data-ref="R_GS" data-pin="1" cx="410" cy="430" r="0"/>
+<circle data-electrical="pin" data-ref="R_GS" data-pin="2" cx="410" cy="530" r="0"/>
+<line x1="410" y1="430" x2="410.0" y2="457.0" stroke="#263747" stroke-width="2"/>
+<rect x="401.0" y="457.0" width="18" height="46" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="410.0" y1="503.0" x2="410" y2="530" stroke="#263747" stroke-width="2"/>
+<text x="386.0" y="476.0" font-size="16" fill="#263747" text-anchor="end" font-weight="400">R_GS</text>
+<text x="386.0" y="500.0" font-size="15" fill="#637586" text-anchor="end" font-weight="400">关断下拉</text>
+<polyline data-electrical="wire" points="410,530 590,530 590,495" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="GND" cx="590" cy="530" r="0"/>
+<line x1="590" y1="530" x2="590" y2="542" stroke="#226850" stroke-width="2"/>
+<line x1="577" y1="542" x2="603" y2="542" stroke="#226850" stroke-width="1.8"/>
+<line x1="581" y1="548" x2="599" y2="548" stroke="#226850" stroke-width="1.8"/>
+<line x1="586" y1="554" x2="594" y2="554" stroke="#226850" stroke-width="1.8"/>
+<circle data-electrical="junction" cx="590" cy="530" r="3.7" fill="#226850"/>
+<text x="44" y="627" font-size="16" fill="#263747" text-anchor="start" font-weight="400">检查：G / D / S 靠近引脚；门极下拉回到源极所属参考地。</text>
+<text x="44" y="651" font-size="16" fill="#263747" text-anchor="start" font-weight="400">续流支路跨接真实负载两端，控制网 GATE 与功率网 LOAD_N 保持分离。</text>
+</g>
+</svg>

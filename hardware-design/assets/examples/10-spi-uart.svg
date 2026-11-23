@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 1120 900" role="img">
+<title>SPI / UART：接口顺序与两端身份</title>
+<desc>可编辑矢量原理图；用于布局与连接表达验证。</desc>
+<metadata id="circuit-model">{&quot;number&quot;: 10, &quot;title&quot;: &quot;SPI / UART：接口顺序与两端身份&quot;, &quot;pins&quot;: [{&quot;ref&quot;: &quot;U1A&quot;, &quot;pin&quot;: &quot;SCK&quot;, &quot;x&quot;: 384, &quot;y&quot;: 250, &quot;net&quot;: &quot;SPI_SCK_SRC&quot;}, {&quot;ref&quot;: &quot;U1A&quot;, &quot;pin&quot;: &quot;MOSI&quot;, &quot;x&quot;: 384, &quot;y&quot;: 290, &quot;net&quot;: &quot;SPI_MOSI&quot;}, {&quot;ref&quot;: &quot;U1A&quot;, &quot;pin&quot;: &quot;MISO&quot;, &quot;x&quot;: 384, &quot;y&quot;: 330, &quot;net&quot;: &quot;SPI_MISO&quot;}, {&quot;ref&quot;: &quot;U1A&quot;, &quot;pin&quot;: &quot;CS_N&quot;, &quot;x&quot;: 384, &quot;y&quot;: 370, &quot;net&quot;: &quot;SPI_CS_N&quot;}, {&quot;ref&quot;: &quot;U1A&quot;, &quot;pin&quot;: &quot;GND&quot;, &quot;x&quot;: 230, &quot;y&quot;: 434, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;U2A&quot;, &quot;pin&quot;: &quot;SCK&quot;, &quot;x&quot;: 736, &quot;y&quot;: 250, &quot;net&quot;: &quot;SPI_SCK&quot;}, {&quot;ref&quot;: &quot;U2A&quot;, &quot;pin&quot;: &quot;SDI&quot;, &quot;x&quot;: 736, &quot;y&quot;: 290, &quot;net&quot;: &quot;SPI_MOSI&quot;}, {&quot;ref&quot;: &quot;U2A&quot;, &quot;pin&quot;: &quot;SDO&quot;, &quot;x&quot;: 736, &quot;y&quot;: 330, &quot;net&quot;: &quot;SPI_MISO&quot;}, {&quot;ref&quot;: &quot;U2A&quot;, &quot;pin&quot;: &quot;CS_N&quot;, &quot;x&quot;: 736, &quot;y&quot;: 370, &quot;net&quot;: &quot;SPI_CS_N&quot;}, {&quot;ref&quot;: &quot;U2A&quot;, &quot;pin&quot;: &quot;GND&quot;, &quot;x&quot;: 890, &quot;y&quot;: 434, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;R1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 440, &quot;y&quot;: 250, &quot;net&quot;: &quot;SPI_SCK_SRC&quot;}, {&quot;ref&quot;: &quot;R1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 560, &quot;y&quot;: 250, &quot;net&quot;: &quot;SPI_SCK&quot;}, {&quot;ref&quot;: &quot;U1B&quot;, &quot;pin&quot;: &quot;TX&quot;, &quot;x&quot;: 384, &quot;y&quot;: 620, &quot;net&quot;: &quot;UART_HOST_TX&quot;}, {&quot;ref&quot;: &quot;U1B&quot;, &quot;pin&quot;: &quot;RX&quot;, &quot;x&quot;: 384, &quot;y&quot;: 670, &quot;net&quot;: &quot;UART_PEER_TX&quot;}, {&quot;ref&quot;: &quot;U1B&quot;, &quot;pin&quot;: &quot;GND&quot;, &quot;x&quot;: 230, &quot;y&quot;: 754, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;U3&quot;, &quot;pin&quot;: &quot;RX&quot;, &quot;x&quot;: 736, &quot;y&quot;: 620, &quot;net&quot;: &quot;UART_TX_LINE&quot;}, {&quot;ref&quot;: &quot;U3&quot;, &quot;pin&quot;: &quot;TX&quot;, &quot;x&quot;: 736, &quot;y&quot;: 670, &quot;net&quot;: &quot;UART_PEER_TX&quot;}, {&quot;ref&quot;: &quot;U3&quot;, &quot;pin&quot;: &quot;GND&quot;, &quot;x&quot;: 890, &quot;y&quot;: 754, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;R2&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 440, &quot;y&quot;: 620, &quot;net&quot;: &quot;UART_HOST_TX&quot;}, {&quot;ref&quot;: &quot;R2&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 560, &quot;y&quot;: 620, &quot;net&quot;: &quot;UART_TX_LINE&quot;}], &quot;labels&quot;: [{&quot;x&quot;: 230, &quot;y&quot;: 455, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 890, &quot;y&quot;: 455, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 230, &quot;y&quot;: 754, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 890, &quot;y&quot;: 754, &quot;net&quot;: &quot;GND&quot;}], &quot;junctions&quot;: [], &quot;segments&quot;: [[[384, 250], [440, 250]], [[560, 250], [736, 250]], [[384, 290], [736, 290]], [[384, 330], [736, 330]], [[384, 370], [736, 370]], [[230, 434], [230, 455]], [[890, 434], [890, 455]], [[384, 620], [440, 620]], [[560, 620], [736, 620]], [[384, 670], [736, 670]]], &quot;texts&quot;: [{&quot;x&quot;: 44, &quot;y&quot;: 51, &quot;text&quot;: &quot;10  SPI / UART：接口顺序与两端身份&quot;, &quot;size&quot;: 28, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 82, &quot;text&quot;: &quot;按协议功能安排逻辑引脚；串联元件两侧使用不同网络；明确 TX/RX 所属端。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 874, &quot;text&quot;: &quot;通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 70, &quot;y&quot;: 143, &quot;text&quot;: &quot;SPI：时钟、数据与片选&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 164, &quot;text&quot;: &quot;U1A&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 230.0, &quot;y&quot;: 207, &quot;text&quot;: &quot;SPI 主机&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 255, &quot;text&quot;: &quot;SCK&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 295, &quot;text&quot;: &quot;MOSI&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 335, &quot;text&quot;: &quot;MISO&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 375, &quot;text&quot;: &quot;CS_N&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 230, &quot;y&quot;: 400, &quot;text&quot;: &quot;GND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 760, &quot;y&quot;: 164, &quot;text&quot;: &quot;U2A&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 890.0, &quot;y&quot;: 207, &quot;text&quot;: &quot;SPI 外设&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 255, &quot;text&quot;: &quot;SCK&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 295, &quot;text&quot;: &quot;SDI&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 335, &quot;text&quot;: &quot;SDO&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 375, &quot;text&quot;: &quot;CS_N&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 890, &quot;y&quot;: 400, &quot;text&quot;: &quot;GND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 500.0, &quot;y&quot;: 225.0, &quot;text&quot;: &quot;R1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 500.0, &quot;y&quot;: 284.0, &quot;text&quot;: &quot;串联&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 70, &quot;y&quot;: 523, &quot;text&quot;: &quot;UART：主机 TX 对端 RX，主机 RX 对端 TX&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 544, &quot;text&quot;: &quot;U1B&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 230.0, &quot;y&quot;: 587, &quot;text&quot;: &quot;UART 主机&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 625, &quot;text&quot;: &quot;TX&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 350, &quot;y&quot;: 675, &quot;text&quot;: &quot;RX&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 230, &quot;y&quot;: 720, &quot;text&quot;: &quot;GND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 760, &quot;y&quot;: 544, &quot;text&quot;: &quot;U3&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 890.0, &quot;y&quot;: 587, &quot;text&quot;: &quot;UART 对端&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 625, &quot;text&quot;: &quot;RX&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 770, &quot;y&quot;: 675, &quot;text&quot;: &quot;TX&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 890, &quot;y&quot;: 720, &quot;text&quot;: &quot;GND&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 500.0, &quot;y&quot;: 595.0, &quot;text&quot;: &quot;R2&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 500.0, &quot;y&quot;: 654.0, &quot;text&quot;: &quot;串联&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 827, &quot;text&quot;: &quot;检查：SPI 信号次序一致；UART 端口命名参照端明确；串联元件没有被同名标签旁路。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 851, &quot;text&quot;: &quot;图中为接口逻辑单元；省略的供电单元须在实际工程中完整表达。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}]}</metadata>
+<g font-family="Noto Sans CJK SC, sans-serif">
+<rect x="0" y="0" width="1120" height="900" fill="white" stroke="none" stroke-width="2"/>
+<text x="44" y="51" font-size="28" fill="#263747" text-anchor="start" font-weight="700">10  SPI / UART：接口顺序与两端身份</text>
+<text x="44" y="82" font-size="16" fill="#637586" text-anchor="start" font-weight="400">按协议功能安排逻辑引脚；串联元件两侧使用不同网络；明确 TX/RX 所属端。</text>
+<line x1="44" y1="104" x2="1076" y2="104" stroke="#b9c6ce" stroke-width="1"/>
+<line x1="44" y1="799" x2="1076" y2="799" stroke="#b9c6ce" stroke-width="1"/>
+<text x="44" y="874" font-size="14" fill="#637586" text-anchor="start" font-weight="400">通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计</text>
+<text x="70" y="143" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">SPI：时钟、数据与片选</text>
+<rect x="100" y="180" width="260" height="230" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="100" y="164" font-size="17" fill="#263747" text-anchor="start" font-weight="700">U1A</text>
+<text x="230.0" y="207" font-size="17" fill="#263747" text-anchor="middle" font-weight="700">SPI 主机</text>
+<line x1="360" y1="250" x2="384" y2="250" stroke="#263747" stroke-width="2"/>
+<text x="350" y="255" font-size="15" fill="#263747" text-anchor="end" font-weight="400">SCK</text>
+<circle data-electrical="pin" data-ref="U1A" data-pin="SCK" cx="384" cy="250" r="0"/>
+<line x1="360" y1="290" x2="384" y2="290" stroke="#263747" stroke-width="2"/>
+<text x="350" y="295" font-size="15" fill="#263747" text-anchor="end" font-weight="400">MOSI</text>
+<circle data-electrical="pin" data-ref="U1A" data-pin="MOSI" cx="384" cy="290" r="0"/>
+<line x1="360" y1="330" x2="384" y2="330" stroke="#263747" stroke-width="2"/>
+<text x="350" y="335" font-size="15" fill="#263747" text-anchor="end" font-weight="400">MISO</text>
+<circle data-electrical="pin" data-ref="U1A" data-pin="MISO" cx="384" cy="330" r="0"/>
+<line x1="360" y1="370" x2="384" y2="370" stroke="#263747" stroke-width="2"/>
+<text x="350" y="375" font-size="15" fill="#263747" text-anchor="end" font-weight="400">CS_N</text>
+<circle data-electrical="pin" data-ref="U1A" data-pin="CS_N" cx="384" cy="370" r="0"/>
+<line x1="230" y1="410" x2="230" y2="434" stroke="#263747" stroke-width="2"/>
+<text x="230" y="400" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">GND</text>
+<circle data-electrical="pin" data-ref="U1A" data-pin="GND" cx="230" cy="434" r="0"/>
+<rect x="760" y="180" width="260" height="230" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="760" y="164" font-size="17" fill="#263747" text-anchor="start" font-weight="700">U2A</text>
+<text x="890.0" y="207" font-size="17" fill="#263747" text-anchor="middle" font-weight="700">SPI 外设</text>
+<line x1="736" y1="250" x2="760" y2="250" stroke="#263747" stroke-width="2"/>
+<text x="770" y="255" font-size="15" fill="#263747" text-anchor="start" font-weight="400">SCK</text>
+<circle data-electrical="pin" data-ref="U2A" data-pin="SCK" cx="736" cy="250" r="0"/>
+<line x1="736" y1="290" x2="760" y2="290" stroke="#263747" stroke-width="2"/>
+<text x="770" y="295" font-size="15" fill="#263747" text-anchor="start" font-weight="400">SDI</text>
+<circle data-electrical="pin" data-ref="U2A" data-pin="SDI" cx="736" cy="290" r="0"/>
+<line x1="736" y1="330" x2="760" y2="330" stroke="#263747" stroke-width="2"/>
+<text x="770" y="335" font-size="15" fill="#263747" text-anchor="start" font-weight="400">SDO</text>
+<circle data-electrical="pin" data-ref="U2A" data-pin="SDO" cx="736" cy="330" r="0"/>
+<line x1="736" y1="370" x2="760" y2="370" stroke="#263747" stroke-width="2"/>
+<text x="770" y="375" font-size="15" fill="#263747" text-anchor="start" font-weight="400">CS_N</text>
+<circle data-electrical="pin" data-ref="U2A" data-pin="CS_N" cx="736" cy="370" r="0"/>
+<line x1="890" y1="410" x2="890" y2="434" stroke="#263747" stroke-width="2"/>
+<text x="890" y="400" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">GND</text>
+<circle data-electrical="pin" data-ref="U2A" data-pin="GND" cx="890" cy="434" r="0"/>
+<polyline data-electrical="wire" points="384,250 440,250" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="R1" data-pin="1" cx="440" cy="250" r="0"/>
+<circle data-electrical="pin" data-ref="R1" data-pin="2" cx="560" cy="250" r="0"/>
+<line x1="440" y1="250" x2="477.0" y2="250.0" stroke="#263747" stroke-width="2"/>
+<rect x="477.0" y="241.0" width="46" height="18" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="523.0" y1="250.0" x2="560" y2="250" stroke="#263747" stroke-width="2"/>
+<text x="500.0" y="225.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">R1</text>
+<text x="500.0" y="284.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">串联</text>
+<polyline data-electrical="wire" points="560,250 736,250" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="384,290 736,290" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="384,330 736,330" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="384,370 736,370" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="230,434 230,455" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="GND" cx="230" cy="455" r="0"/>
+<line x1="230" y1="455" x2="230" y2="467" stroke="#226850" stroke-width="2"/>
+<line x1="217" y1="467" x2="243" y2="467" stroke="#226850" stroke-width="1.8"/>
+<line x1="221" y1="473" x2="239" y2="473" stroke="#226850" stroke-width="1.8"/>
+<line x1="226" y1="479" x2="234" y2="479" stroke="#226850" stroke-width="1.8"/>
+<polyline data-electrical="wire" points="890,434 890,455" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="GND" cx="890" cy="455" r="0"/>
+<line x1="890" y1="455" x2="890" y2="467" stroke="#226850" stroke-width="2"/>
+<line x1="877" y1="467" x2="903" y2="467" stroke="#226850" stroke-width="1.8"/>
+<line x1="881" y1="473" x2="899" y2="473" stroke="#226850" stroke-width="1.8"/>
+<line x1="886" y1="479" x2="894" y2="479" stroke="#226850" stroke-width="1.8"/>
+<text x="70" y="523" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">UART：主机 TX 对端 RX，主机 RX 对端 TX</text>
+<rect x="100" y="560" width="260" height="170" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="100" y="544" font-size="17" fill="#263747" text-anchor="start" font-weight="700">U1B</text>
+<text x="230.0" y="587" font-size="17" fill="#263747" text-anchor="middle" font-weight="700">UART 主机</text>
+<line x1="360" y1="620" x2="384" y2="620" stroke="#263747" stroke-width="2"/>
+<text x="350" y="625" font-size="15" fill="#263747" text-anchor="end" font-weight="400">TX</text>
+<circle data-electrical="pin" data-ref="U1B" data-pin="TX" cx="384" cy="620" r="0"/>
+<line x1="360" y1="670" x2="384" y2="670" stroke="#263747" stroke-width="2"/>
+<text x="350" y="675" font-size="15" fill="#263747" text-anchor="end" font-weight="400">RX</text>
+<circle data-electrical="pin" data-ref="U1B" data-pin="RX" cx="384" cy="670" r="0"/>
+<line x1="230" y1="730" x2="230" y2="754" stroke="#263747" stroke-width="2"/>
+<text x="230" y="720" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">GND</text>
+<circle data-electrical="pin" data-ref="U1B" data-pin="GND" cx="230" cy="754" r="0"/>
+<rect x="760" y="560" width="260" height="170" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="760" y="544" font-size="17" fill="#263747" text-anchor="start" font-weight="700">U3</text>
+<text x="890.0" y="587" font-size="17" fill="#263747" text-anchor="middle" font-weight="700">UART 对端</text>
+<line x1="736" y1="620" x2="760" y2="620" stroke="#263747" stroke-width="2"/>
+<text x="770" y="625" font-size="15" fill="#263747" text-anchor="start" font-weight="400">RX</text>
+<circle data-electrical="pin" data-ref="U3" data-pin="RX" cx="736" cy="620" r="0"/>
+<line x1="736" y1="670" x2="760" y2="670" stroke="#263747" stroke-width="2"/>
+<text x="770" y="675" font-size="15" fill="#263747" text-anchor="start" font-weight="400">TX</text>
+<circle data-electrical="pin" data-ref="U3" data-pin="TX" cx="736" cy="670" r="0"/>
+<line x1="890" y1="730" x2="890" y2="754" stroke="#263747" stroke-width="2"/>
+<text x="890" y="720" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">GND</text>
+<circle data-electrical="pin" data-ref="U3" data-pin="GND" cx="890" cy="754" r="0"/>
+<polyline data-electrical="wire" points="384,620 440,620" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="R2" data-pin="1" cx="440" cy="620" r="0"/>
+<circle data-electrical="pin" data-ref="R2" data-pin="2" cx="560" cy="620" r="0"/>
+<line x1="440" y1="620" x2="477.0" y2="620.0" stroke="#263747" stroke-width="2"/>
+<rect x="477.0" y="611.0" width="46" height="18" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="523.0" y1="620.0" x2="560" y2="620" stroke="#263747" stroke-width="2"/>
+<text x="500.0" y="595.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">R2</text>
+<text x="500.0" y="654.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">串联</text>
+<polyline data-electrical="wire" points="560,620 736,620" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="384,670 736,670" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="GND" cx="230" cy="754" r="0"/>
+<line x1="230" y1="754" x2="230" y2="766" stroke="#226850" stroke-width="2"/>
+<line x1="217" y1="766" x2="243" y2="766" stroke="#226850" stroke-width="1.8"/>
+<line x1="221" y1="772" x2="239" y2="772" stroke="#226850" stroke-width="1.8"/>
+<line x1="226" y1="778" x2="234" y2="778" stroke="#226850" stroke-width="1.8"/>
+<circle data-electrical="label" data-net="GND" cx="890" cy="754" r="0"/>
+<line x1="890" y1="754" x2="890" y2="766" stroke="#226850" stroke-width="2"/>
+<line x1="877" y1="766" x2="903" y2="766" stroke="#226850" stroke-width="1.8"/>
+<line x1="881" y1="772" x2="899" y2="772" stroke="#226850" stroke-width="1.8"/>
+<line x1="886" y1="778" x2="894" y2="778" stroke="#226850" stroke-width="1.8"/>
+<text x="44" y="827" font-size="16" fill="#263747" text-anchor="start" font-weight="400">检查：SPI 信号次序一致；UART 端口命名参照端明确；串联元件没有被同名标签旁路。</text>
+<text x="44" y="851" font-size="16" fill="#263747" text-anchor="start" font-weight="400">图中为接口逻辑单元；省略的供电单元须在实际工程中完整表达。</text>
+</g>
+</svg>

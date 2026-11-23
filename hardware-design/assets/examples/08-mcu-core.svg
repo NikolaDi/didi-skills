@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 1120 900" role="img">
+<title>MCU：供电、复位、时钟与接口</title>
+<desc>可编辑矢量原理图；用于布局与连接表达验证。</desc>
+<metadata id="circuit-model">{&quot;number&quot;: 8, &quot;title&quot;: &quot;MCU：供电、复位、时钟与接口&quot;, &quot;pins&quot;: [{&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;NRST&quot;, &quot;x&quot;: 446, &quot;y&quot;: 320, &quot;net&quot;: &quot;RESET_N&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;OSC_IN&quot;, &quot;x&quot;: 446, &quot;y&quot;: 420, &quot;net&quot;: &quot;OSC_IN&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;OSC_OUT&quot;, &quot;x&quot;: 446, &quot;y&quot;: 470, &quot;net&quot;: &quot;OSC_OUT&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;VDD&quot;, &quot;x&quot;: 550, &quot;y&quot;: 216, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;VSS&quot;, &quot;x&quot;: 590, &quot;y&quot;: 544, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;SCK&quot;, &quot;x&quot;: 734, &quot;y&quot;: 320, &quot;net&quot;: &quot;SPI1_SCK&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;MOSI&quot;, &quot;x&quot;: 734, &quot;y&quot;: 360, &quot;net&quot;: &quot;SPI1_MOSI&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;MISO&quot;, &quot;x&quot;: 734, &quot;y&quot;: 400, &quot;net&quot;: &quot;SPI1_MISO&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;SWDIO&quot;, &quot;x&quot;: 734, &quot;y&quot;: 440, &quot;net&quot;: &quot;SWDIO&quot;}, {&quot;ref&quot;: &quot;U1&quot;, &quot;pin&quot;: &quot;SWCLK&quot;, &quot;x&quot;: 734, &quot;y&quot;: 480, &quot;net&quot;: &quot;SWCLK&quot;}, {&quot;ref&quot;: &quot;R1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 200, &quot;y&quot;: 220, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;ref&quot;: &quot;R1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 200, &quot;y&quot;: 300, &quot;net&quot;: &quot;RESET_N&quot;}, {&quot;ref&quot;: &quot;SW1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 100, &quot;y&quot;: 380, &quot;net&quot;: &quot;RESET_N&quot;}, {&quot;ref&quot;: &quot;SW1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 100, &quot;y&quot;: 460, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;C1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 300, &quot;y&quot;: 380, &quot;net&quot;: &quot;RESET_N&quot;}, {&quot;ref&quot;: &quot;C1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 300, &quot;y&quot;: 460, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;C2&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 790, &quot;y&quot;: 215, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;ref&quot;: &quot;C2&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 790, &quot;y&quot;: 260, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;C3&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 960, &quot;y&quot;: 215, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;ref&quot;: &quot;C3&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 960, &quot;y&quot;: 260, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;X1&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 130, &quot;y&quot;: 620, &quot;net&quot;: &quot;OSC_IN&quot;}, {&quot;ref&quot;: &quot;X1&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 330, &quot;y&quot;: 620, &quot;net&quot;: &quot;OSC_OUT&quot;}, {&quot;ref&quot;: &quot;C4&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 130, &quot;y&quot;: 620, &quot;net&quot;: &quot;OSC_IN&quot;}, {&quot;ref&quot;: &quot;C4&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 130, &quot;y&quot;: 710, &quot;net&quot;: &quot;GND&quot;}, {&quot;ref&quot;: &quot;C5&quot;, &quot;pin&quot;: &quot;1&quot;, &quot;x&quot;: 330, &quot;y&quot;: 650, &quot;net&quot;: &quot;OSC_OUT&quot;}, {&quot;ref&quot;: &quot;C5&quot;, &quot;pin&quot;: &quot;2&quot;, &quot;x&quot;: 330, &quot;y&quot;: 710, &quot;net&quot;: &quot;GND&quot;}], &quot;labels&quot;: [{&quot;x&quot;: 550, &quot;y&quot;: 190, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;x&quot;: 590, &quot;y&quot;: 580, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 200, &quot;y&quot;: 200, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;x&quot;: 100, &quot;y&quot;: 460, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 300, &quot;y&quot;: 460, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 790, &quot;y&quot;: 195, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;x&quot;: 790, &quot;y&quot;: 260, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 960, &quot;y&quot;: 195, &quot;net&quot;: &quot;+3V3&quot;}, {&quot;x&quot;: 960, &quot;y&quot;: 260, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 320, &quot;net&quot;: &quot;SPI1_SCK&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 360, &quot;net&quot;: &quot;SPI1_MOSI&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 400, &quot;net&quot;: &quot;SPI1_MISO&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 440, &quot;net&quot;: &quot;SWDIO&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 480, &quot;net&quot;: &quot;SWCLK&quot;}, {&quot;x&quot;: 130, &quot;y&quot;: 710, &quot;net&quot;: &quot;GND&quot;}, {&quot;x&quot;: 330, &quot;y&quot;: 710, &quot;net&quot;: &quot;GND&quot;}], &quot;junctions&quot;: [[200, 320], [300, 320], [130, 620], [330, 650]], &quot;segments&quot;: [[[550, 190], [550, 216]], [[590, 544], [590, 580]], [[200, 200], [200, 220]], [[200, 300], [200, 320]], [[100, 320], [446, 320]], [[100, 320], [100, 380]], [[300, 320], [300, 380]], [[790, 195], [790, 215]], [[960, 195], [960, 215]], [[734, 320], [1020, 320]], [[734, 360], [1020, 360]], [[734, 400], [1020, 400]], [[734, 440], [1020, 440]], [[734, 480], [1020, 480]], [[446, 420], [390, 420]], [[390, 420], [390, 560]], [[390, 560], [130, 560]], [[130, 560], [130, 620]], [[446, 470], [420, 470]], [[420, 470], [420, 650]], [[420, 650], [330, 650]], [[330, 650], [330, 620]]], &quot;texts&quot;: [{&quot;x&quot;: 44, &quot;y&quot;: 51, &quot;text&quot;: &quot;08  MCU：供电、复位、时钟与接口&quot;, &quot;size&quot;: 28, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 82, &quot;text&quot;: &quot;按功能组织引脚；局部外围连续连线；电源去耦保留器件归属。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 874, &quot;text&quot;: &quot;通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 70, &quot;y&quot;: 136, &quot;text&quot;: &quot;复位：上拉与局部 RC&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 470, &quot;y&quot;: 224, &quot;text&quot;: &quot;U1&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 590.0, &quot;y&quot;: 267, &quot;text&quot;: &quot;MCU · 逻辑单元&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 480, &quot;y&quot;: 325, &quot;text&quot;: &quot;NRST&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 480, &quot;y&quot;: 425, &quot;text&quot;: &quot;OSC_IN&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 480, &quot;y&quot;: 475, &quot;text&quot;: &quot;OSC_OUT&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 550, &quot;y&quot;: 288, &quot;text&quot;: &quot;VDD&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 590, &quot;y&quot;: 510, &quot;text&quot;: &quot;VSS&quot;, &quot;size&quot;: 14, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 700, &quot;y&quot;: 325, &quot;text&quot;: &quot;SCK&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 700, &quot;y&quot;: 365, &quot;text&quot;: &quot;MOSI&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 700, &quot;y&quot;: 405, &quot;text&quot;: &quot;MISO&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 700, &quot;y&quot;: 445, &quot;text&quot;: &quot;SWDIO&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 700, &quot;y&quot;: 485, &quot;text&quot;: &quot;SWCLK&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 550, &quot;y&quot;: 165, &quot;text&quot;: &quot;+3V3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 200, &quot;y&quot;: 175, &quot;text&quot;: &quot;+3V3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 224.0, &quot;y&quot;: 256.0, &quot;text&quot;: &quot;R1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 224.0, &quot;y&quot;: 280.0, &quot;text&quot;: &quot;上拉&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 124.0, &quot;y&quot;: 416.0, &quot;text&quot;: &quot;SW1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 324.0, &quot;y&quot;: 416.0, &quot;text&quot;: &quot;C1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 324.0, &quot;y&quot;: 440.0, &quot;text&quot;: &quot;复位滤波&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 750, &quot;y&quot;: 138, &quot;text&quot;: &quot;U1 的电源去耦&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 790, &quot;y&quot;: 170, &quot;text&quot;: &quot;+3V3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 814.0, &quot;y&quot;: 233.5, &quot;text&quot;: &quot;C2&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 814.0, &quot;y&quot;: 257.5, &quot;text&quot;: &quot;去耦&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 960, &quot;y&quot;: 170, &quot;text&quot;: &quot;+3V3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 984.0, &quot;y&quot;: 233.5, &quot;text&quot;: &quot;C3&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 984.0, &quot;y&quot;: 257.5, &quot;text&quot;: &quot;去耦&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 308, &quot;text&quot;: &quot;SPI1_SCK&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 348, &quot;text&quot;: &quot;SPI1_MOSI&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 388, &quot;text&quot;: &quot;SPI1_MISO&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 428, &quot;text&quot;: &quot;SWDIO&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 1020, &quot;y&quot;: 468, &quot;text&quot;: &quot;SWCLK&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;end&quot;}, {&quot;x&quot;: 70, &quot;y&quot;: 548, &quot;text&quot;: &quot;时钟：晶体与负载电容&quot;, &quot;size&quot;: 18, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 230.0, &quot;y&quot;: 582.0, &quot;text&quot;: &quot;X1&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 230.0, &quot;y&quot;: 668.0, &quot;text&quot;: &quot;晶体&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;middle&quot;}, {&quot;x&quot;: 154.0, &quot;y&quot;: 661.0, &quot;text&quot;: &quot;C4&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 154.0, &quot;y&quot;: 685.0, &quot;text&quot;: &quot;负载&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 354.0, &quot;y&quot;: 676.0, &quot;text&quot;: &quot;C5&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 354.0, &quot;y&quot;: 700.0, &quot;text&quot;: &quot;负载&quot;, &quot;size&quot;: 15, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 720, &quot;y&quot;: 610, &quot;text&quot;: &quot;同一芯片的不同功能可以分区，&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 720, &quot;y&quot;: 640, &quot;text&quot;: &quot;器件身份和供电归属保持明确。&quot;, &quot;size&quot;: 17, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 720, &quot;y&quot;: 680, &quot;text&quot;: &quot;外围参数取决于选定 MCU。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 827, &quot;text&quot;: &quot;检查：复位支路紧凑；晶体两端分别连接；通信引脚按组有序扇出。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}, {&quot;x&quot;: 44, &quot;y&quot;: 851, &quot;text&quot;: &quot;边界：这里只展示逻辑单元，实际器件的全部电源脚和约束须另行核对。&quot;, &quot;size&quot;: 16, &quot;anchor&quot;: &quot;start&quot;}]}</metadata>
+<g font-family="Noto Sans CJK SC, sans-serif">
+<rect x="0" y="0" width="1120" height="900" fill="white" stroke="none" stroke-width="2"/>
+<text x="44" y="51" font-size="28" fill="#263747" text-anchor="start" font-weight="700">08  MCU：供电、复位、时钟与接口</text>
+<text x="44" y="82" font-size="16" fill="#637586" text-anchor="start" font-weight="400">按功能组织引脚；局部外围连续连线；电源去耦保留器件归属。</text>
+<line x1="44" y1="104" x2="1076" y2="104" stroke="#b9c6ce" stroke-width="1"/>
+<line x1="44" y1="799" x2="1076" y2="799" stroke="#b9c6ce" stroke-width="1"/>
+<text x="44" y="874" font-size="14" fill="#637586" text-anchor="start" font-weight="400">通用拓扑与布局校验图 · 逻辑引脚，非封装脚号 · 参数与性能需按实际器件设计</text>
+<text x="70" y="136" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">复位：上拉与局部 RC</text>
+<rect x="470" y="240" width="240" height="280" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="470" y="224" font-size="17" fill="#263747" text-anchor="start" font-weight="700">U1</text>
+<text x="590.0" y="267" font-size="17" fill="#263747" text-anchor="middle" font-weight="700">MCU · 逻辑单元</text>
+<line x1="446" y1="320" x2="470" y2="320" stroke="#263747" stroke-width="2"/>
+<text x="480" y="325" font-size="15" fill="#263747" text-anchor="start" font-weight="400">NRST</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="NRST" cx="446" cy="320" r="0"/>
+<line x1="446" y1="420" x2="470" y2="420" stroke="#263747" stroke-width="2"/>
+<text x="480" y="425" font-size="15" fill="#263747" text-anchor="start" font-weight="400">OSC_IN</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="OSC_IN" cx="446" cy="420" r="0"/>
+<line x1="446" y1="470" x2="470" y2="470" stroke="#263747" stroke-width="2"/>
+<text x="480" y="475" font-size="15" fill="#263747" text-anchor="start" font-weight="400">OSC_OUT</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="OSC_OUT" cx="446" cy="470" r="0"/>
+<line x1="550" y1="216" x2="550" y2="240" stroke="#263747" stroke-width="2"/>
+<text x="550" y="288" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">VDD</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="VDD" cx="550" cy="216" r="0"/>
+<line x1="590" y1="520" x2="590" y2="544" stroke="#263747" stroke-width="2"/>
+<text x="590" y="510" font-size="14" fill="#263747" text-anchor="middle" font-weight="400">VSS</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="VSS" cx="590" cy="544" r="0"/>
+<line x1="710" y1="320" x2="734" y2="320" stroke="#263747" stroke-width="2"/>
+<text x="700" y="325" font-size="15" fill="#263747" text-anchor="end" font-weight="400">SCK</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="SCK" cx="734" cy="320" r="0"/>
+<line x1="710" y1="360" x2="734" y2="360" stroke="#263747" stroke-width="2"/>
+<text x="700" y="365" font-size="15" fill="#263747" text-anchor="end" font-weight="400">MOSI</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="MOSI" cx="734" cy="360" r="0"/>
+<line x1="710" y1="400" x2="734" y2="400" stroke="#263747" stroke-width="2"/>
+<text x="700" y="405" font-size="15" fill="#263747" text-anchor="end" font-weight="400">MISO</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="MISO" cx="734" cy="400" r="0"/>
+<line x1="710" y1="440" x2="734" y2="440" stroke="#263747" stroke-width="2"/>
+<text x="700" y="445" font-size="15" fill="#263747" text-anchor="end" font-weight="400">SWDIO</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="SWDIO" cx="734" cy="440" r="0"/>
+<line x1="710" y1="480" x2="734" y2="480" stroke="#263747" stroke-width="2"/>
+<text x="700" y="485" font-size="15" fill="#263747" text-anchor="end" font-weight="400">SWCLK</text>
+<circle data-electrical="pin" data-ref="U1" data-pin="SWCLK" cx="734" cy="480" r="0"/>
+<circle data-electrical="label" data-net="+3V3" cx="550" cy="190" r="0"/>
+<line x1="550" y1="190" x2="550" y2="177" stroke="#226850" stroke-width="2"/>
+<line x1="540" y1="177" x2="560" y2="177" stroke="#226850" stroke-width="2"/>
+<text x="550" y="165" font-size="16" fill="#24518a" text-anchor="middle" font-weight="400">+3V3</text>
+<polyline data-electrical="wire" points="550,190 550,216" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="590,544 590,580" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="GND" cx="590" cy="580" r="0"/>
+<line x1="590" y1="580" x2="590" y2="592" stroke="#226850" stroke-width="2"/>
+<line x1="577" y1="592" x2="603" y2="592" stroke="#226850" stroke-width="1.8"/>
+<line x1="581" y1="598" x2="599" y2="598" stroke="#226850" stroke-width="1.8"/>
+<line x1="586" y1="604" x2="594" y2="604" stroke="#226850" stroke-width="1.8"/>
+<circle data-electrical="label" data-net="+3V3" cx="200" cy="200" r="0"/>
+<line x1="200" y1="200" x2="200" y2="187" stroke="#226850" stroke-width="2"/>
+<line x1="190" y1="187" x2="210" y2="187" stroke="#226850" stroke-width="2"/>
+<text x="200" y="175" font-size="16" fill="#24518a" text-anchor="middle" font-weight="400">+3V3</text>
+<polyline data-electrical="wire" points="200,200 200,220" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="R1" data-pin="1" cx="200" cy="220" r="0"/>
+<circle data-electrical="pin" data-ref="R1" data-pin="2" cx="200" cy="300" r="0"/>
+<line x1="200" y1="220" x2="200.0" y2="237.0" stroke="#263747" stroke-width="2"/>
+<rect x="191.0" y="237.0" width="18" height="46" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="200.0" y1="283.0" x2="200" y2="300" stroke="#263747" stroke-width="2"/>
+<text x="224.0" y="256.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">R1</text>
+<text x="224.0" y="280.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">上拉</text>
+<polyline data-electrical="wire" points="200,300 200,320" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="junction" cx="200" cy="320" r="3.7" fill="#226850"/>
+<polyline data-electrical="wire" points="100,320 446,320" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="100,320 100,380" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="SW1" data-pin="1" cx="100" cy="380" r="0"/>
+<circle data-electrical="pin" data-ref="SW1" data-pin="2" cx="100" cy="460" r="0"/>
+<line x1="100" y1="380" x2="100.0" y2="402.0" stroke="#263747" stroke-width="2"/>
+<line x1="100.0" y1="438.0" x2="100" y2="460" stroke="#263747" stroke-width="2"/>
+<circle cx="100.0" cy="402.0" r="3" fill="white" stroke="#263747" stroke-width="2"/>
+<circle cx="100.0" cy="438.0" r="3" fill="white" stroke="#263747" stroke-width="2"/>
+<line x1="100.0" y1="402.0" x2="118.0" y2="437.0" stroke="#263747" stroke-width="2"/>
+<text x="124.0" y="416.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">SW1</text>
+<circle data-electrical="label" data-net="GND" cx="100" cy="460" r="0"/>
+<line x1="100" y1="460" x2="100" y2="472" stroke="#226850" stroke-width="2"/>
+<line x1="87" y1="472" x2="113" y2="472" stroke="#226850" stroke-width="1.8"/>
+<line x1="91" y1="478" x2="109" y2="478" stroke="#226850" stroke-width="1.8"/>
+<line x1="96" y1="484" x2="104" y2="484" stroke="#226850" stroke-width="1.8"/>
+<polyline data-electrical="wire" points="300,320 300,380" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="junction" cx="300" cy="320" r="3.7" fill="#226850"/>
+<circle data-electrical="pin" data-ref="C1" data-pin="1" cx="300" cy="380" r="0"/>
+<circle data-electrical="pin" data-ref="C1" data-pin="2" cx="300" cy="460" r="0"/>
+<line x1="300" y1="380" x2="300.0" y2="414.0" stroke="#263747" stroke-width="2"/>
+<line x1="300.0" y1="426.0" x2="300" y2="460" stroke="#263747" stroke-width="2"/>
+<line x1="283.0" y1="414.0" x2="317.0" y2="414.0" stroke="#263747" stroke-width="2"/>
+<line x1="283.0" y1="426.0" x2="317.0" y2="426.0" stroke="#263747" stroke-width="2"/>
+<text x="324.0" y="416.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C1</text>
+<text x="324.0" y="440.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">复位滤波</text>
+<circle data-electrical="label" data-net="GND" cx="300" cy="460" r="0"/>
+<line x1="300" y1="460" x2="300" y2="472" stroke="#226850" stroke-width="2"/>
+<line x1="287" y1="472" x2="313" y2="472" stroke="#226850" stroke-width="1.8"/>
+<line x1="291" y1="478" x2="309" y2="478" stroke="#226850" stroke-width="1.8"/>
+<line x1="296" y1="484" x2="304" y2="484" stroke="#226850" stroke-width="1.8"/>
+<text x="750" y="138" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">U1 的电源去耦</text>
+<circle data-electrical="label" data-net="+3V3" cx="790" cy="195" r="0"/>
+<line x1="790" y1="195" x2="790" y2="182" stroke="#226850" stroke-width="2"/>
+<line x1="780" y1="182" x2="800" y2="182" stroke="#226850" stroke-width="2"/>
+<text x="790" y="170" font-size="16" fill="#24518a" text-anchor="middle" font-weight="400">+3V3</text>
+<polyline data-electrical="wire" points="790,195 790,215" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="C2" data-pin="1" cx="790" cy="215" r="0"/>
+<circle data-electrical="pin" data-ref="C2" data-pin="2" cx="790" cy="260" r="0"/>
+<line x1="790" y1="215" x2="790.0" y2="231.5" stroke="#263747" stroke-width="2"/>
+<line x1="790.0" y1="243.5" x2="790" y2="260" stroke="#263747" stroke-width="2"/>
+<line x1="773.0" y1="231.5" x2="807.0" y2="231.5" stroke="#263747" stroke-width="2"/>
+<line x1="773.0" y1="243.5" x2="807.0" y2="243.5" stroke="#263747" stroke-width="2"/>
+<text x="814.0" y="233.5" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C2</text>
+<text x="814.0" y="257.5" font-size="15" fill="#637586" text-anchor="start" font-weight="400">去耦</text>
+<circle data-electrical="label" data-net="GND" cx="790" cy="260" r="0"/>
+<line x1="790" y1="260" x2="790" y2="272" stroke="#226850" stroke-width="2"/>
+<line x1="777" y1="272" x2="803" y2="272" stroke="#226850" stroke-width="1.8"/>
+<line x1="781" y1="278" x2="799" y2="278" stroke="#226850" stroke-width="1.8"/>
+<line x1="786" y1="284" x2="794" y2="284" stroke="#226850" stroke-width="1.8"/>
+<circle data-electrical="label" data-net="+3V3" cx="960" cy="195" r="0"/>
+<line x1="960" y1="195" x2="960" y2="182" stroke="#226850" stroke-width="2"/>
+<line x1="950" y1="182" x2="970" y2="182" stroke="#226850" stroke-width="2"/>
+<text x="960" y="170" font-size="16" fill="#24518a" text-anchor="middle" font-weight="400">+3V3</text>
+<polyline data-electrical="wire" points="960,195 960,215" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="C3" data-pin="1" cx="960" cy="215" r="0"/>
+<circle data-electrical="pin" data-ref="C3" data-pin="2" cx="960" cy="260" r="0"/>
+<line x1="960" y1="215" x2="960.0" y2="231.5" stroke="#263747" stroke-width="2"/>
+<line x1="960.0" y1="243.5" x2="960" y2="260" stroke="#263747" stroke-width="2"/>
+<line x1="943.0" y1="231.5" x2="977.0" y2="231.5" stroke="#263747" stroke-width="2"/>
+<line x1="943.0" y1="243.5" x2="977.0" y2="243.5" stroke="#263747" stroke-width="2"/>
+<text x="984.0" y="233.5" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C3</text>
+<text x="984.0" y="257.5" font-size="15" fill="#637586" text-anchor="start" font-weight="400">去耦</text>
+<circle data-electrical="label" data-net="GND" cx="960" cy="260" r="0"/>
+<line x1="960" y1="260" x2="960" y2="272" stroke="#226850" stroke-width="2"/>
+<line x1="947" y1="272" x2="973" y2="272" stroke="#226850" stroke-width="1.8"/>
+<line x1="951" y1="278" x2="969" y2="278" stroke="#226850" stroke-width="1.8"/>
+<line x1="956" y1="284" x2="964" y2="284" stroke="#226850" stroke-width="1.8"/>
+<polyline data-electrical="wire" points="734,320 1020,320" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="SPI1_SCK" cx="1020" cy="320" r="0"/>
+<circle cx="1020" cy="320" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="1020" y="308" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">SPI1_SCK</text>
+<polyline data-electrical="wire" points="734,360 1020,360" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="SPI1_MOSI" cx="1020" cy="360" r="0"/>
+<circle cx="1020" cy="360" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="1020" y="348" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">SPI1_MOSI</text>
+<polyline data-electrical="wire" points="734,400 1020,400" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="SPI1_MISO" cx="1020" cy="400" r="0"/>
+<circle cx="1020" cy="400" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="1020" y="388" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">SPI1_MISO</text>
+<polyline data-electrical="wire" points="734,440 1020,440" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="SWDIO" cx="1020" cy="440" r="0"/>
+<circle cx="1020" cy="440" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="1020" y="428" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">SWDIO</text>
+<polyline data-electrical="wire" points="734,480 1020,480" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="label" data-net="SWCLK" cx="1020" cy="480" r="0"/>
+<circle cx="1020" cy="480" r="3" fill="white" stroke="#226850" stroke-width="1.6"/>
+<text x="1020" y="468" font-size="16" fill="#24518a" text-anchor="end" font-weight="400">SWCLK</text>
+<text x="70" y="548" font-size="18" fill="#24518a" text-anchor="start" font-weight="700">时钟：晶体与负载电容</text>
+<polyline data-electrical="wire" points="446,420 390,420 390,560 130,560 130,620" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<polyline data-electrical="wire" points="446,470 420,470 420,650 330,650 330,620" fill="none" stroke="#226850" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
+<circle data-electrical="pin" data-ref="X1" data-pin="1" cx="130" cy="620" r="0"/>
+<circle data-electrical="pin" data-ref="X1" data-pin="2" cx="330" cy="620" r="0"/>
+<line x1="130" y1="620" x2="210.0" y2="620.0" stroke="#263747" stroke-width="2"/>
+<line x1="250.0" y1="620.0" x2="330" y2="620" stroke="#263747" stroke-width="2"/>
+<line x1="210.0" y1="600.0" x2="210.0" y2="640.0" stroke="#263747" stroke-width="2"/>
+<line x1="250.0" y1="600.0" x2="250.0" y2="640.0" stroke="#263747" stroke-width="2"/>
+<rect x="220.0" y="595.0" width="20" height="50" fill="white" stroke="#263747" stroke-width="2"/>
+<text x="230.0" y="582.0" font-size="16" fill="#263747" text-anchor="middle" font-weight="400">X1</text>
+<text x="230.0" y="668.0" font-size="15" fill="#637586" text-anchor="middle" font-weight="400">晶体</text>
+<circle data-electrical="pin" data-ref="C4" data-pin="1" cx="130" cy="620" r="0"/>
+<circle data-electrical="pin" data-ref="C4" data-pin="2" cx="130" cy="710" r="0"/>
+<line x1="130" y1="620" x2="130.0" y2="659.0" stroke="#263747" stroke-width="2"/>
+<line x1="130.0" y1="671.0" x2="130" y2="710" stroke="#263747" stroke-width="2"/>
+<line x1="113.0" y1="659.0" x2="147.0" y2="659.0" stroke="#263747" stroke-width="2"/>
+<line x1="113.0" y1="671.0" x2="147.0" y2="671.0" stroke="#263747" stroke-width="2"/>
+<text x="154.0" y="661.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C4</text>
+<text x="154.0" y="685.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">负载</text>
+<circle data-electrical="junction" cx="130" cy="620" r="3.7" fill="#226850"/>
+<circle data-electrical="pin" data-ref="C5" data-pin="1" cx="330" cy="650" r="0"/>
+<circle data-electrical="pin" data-ref="C5" data-pin="2" cx="330" cy="710" r="0"/>
+<line x1="330" y1="650" x2="330.0" y2="674.0" stroke="#263747" stroke-width="2"/>
+<line x1="330.0" y1="686.0" x2="330" y2="710" stroke="#263747" stroke-width="2"/>
+<line x1="313.0" y1="674.0" x2="347.0" y2="674.0" stroke="#263747" stroke-width="2"/>
+<line x1="313.0" y1="686.0" x2="347.0" y2="686.0" stroke="#263747" stroke-width="2"/>
+<text x="354.0" y="676.0" font-size="16" fill="#263747" text-anchor="start" font-weight="400">C5</text>
+<text x="354.0" y="700.0" font-size="15" fill="#637586" text-anchor="start" font-weight="400">负载</text>
+<circle data-electrical="junction" cx="330" cy="650" r="3.7" fill="#226850"/>
+<circle data-electrical="label" data-net="GND" cx="130" cy="710" r="0"/>
+<line x1="130" y1="710" x2="130" y2="722" stroke="#226850" stroke-width="2"/>
+<line x1="117" y1="722" x2="143" y2="722" stroke="#226850" stroke-width="1.8"/>
+<line x1="121" y1="728" x2="139" y2="728" stroke="#226850" stroke-width="1.8"/>
+<line x1="126" y1="734" x2="134" y2="734" stroke="#226850" stroke-width="1.8"/>
+<circle data-electrical="label" data-net="GND" cx="330" cy="710" r="0"/>
+<line x1="330" y1="710" x2="330" y2="722" stroke="#226850" stroke-width="2"/>
+<line x1="317" y1="722" x2="343" y2="722" stroke="#226850" stroke-width="1.8"/>
+<line x1="321" y1="728" x2="339" y2="728" stroke="#226850" stroke-width="1.8"/>
+<line x1="326" y1="734" x2="334" y2="734" stroke="#226850" stroke-width="1.8"/>
+<text x="720" y="610" font-size="17" fill="#637586" text-anchor="start" font-weight="400">同一芯片的不同功能可以分区，</text>
+<text x="720" y="640" font-size="17" fill="#637586" text-anchor="start" font-weight="400">器件身份和供电归属保持明确。</text>
+<text x="720" y="680" font-size="16" fill="#637586" text-anchor="start" font-weight="400">外围参数取决于选定 MCU。</text>
+<text x="44" y="827" font-size="16" fill="#263747" text-anchor="start" font-weight="400">检查：复位支路紧凑；晶体两端分别连接；通信引脚按组有序扇出。</text>
+<text x="44" y="851" font-size="16" fill="#263747" text-anchor="start" font-weight="400">边界：这里只展示逻辑单元，实际器件的全部电源脚和约束须另行核对。</text>
+</g>
+</svg>
