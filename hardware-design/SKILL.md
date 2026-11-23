@@ -22,7 +22,7 @@ description: 设计、评审和交付板级硬件，覆盖选型、原理图、P
 | 绘制或评审某一类电路 | [14 类典型电路画法与图例](references/circuit-patterns.md) | 这一级的主通路、反馈、参考和控制端该怎样画，沿线要核对哪些节点？ |
 | 封装、结构、布局、走线或投板前检查 | [PCB 与装配](references/pcb.md) | 电流如何返回，是否装得下、焊得到、测得到？ |
 | 生成 BOM、补价、统计焊点或估算成本 | [BOM、替料核查与成本估算](references/bom-and-costing.md)、[旧报价失效后的补价流程](references/bom-and-costing.md#旧报价失效后的补价)、[焊点数量与焊接费用](references/bom-and-costing.md#焊点数量与焊接费用) | 按装配版本需要哪些料、焊多少点，材料和焊接各花多少钱？ |
-| 制作或调整采购 BOM 工作簿 | [采购汇总与交付检查](references/bom-and-costing.md#可编辑工作簿与交付检查) | 能否直接读到单板和整批合计，并核对费用构成？ |
+| 制作或调整采购 BOM 工作簿 | [汇总首页、采购页与交付检查](references/bom-and-costing.md#可编辑工作簿与交付检查) | 能否从首页核对材料预算、按开机费规则计收的焊接费，以及单板和整批合计？ |
 | 整理制板、采购、贴装与测试资料 | [生产资料与放行](references/production.md) | 工厂拿到这一版，能否唯一确定怎么做板、装什么和怎么验？ |
 | 首板上电、试产、量产维护、替代料或退市 | [验证与变更](references/verification.md) | 哪些指标已测，哪个批次受影响，变更后需要重验什么？ |
 | 比较两个版本或评审工程变更 | [设计变更复核](references/design-change-review.md) | 哪些改动影响连接、装配或验收，哪些下游资料需要同步？ |
