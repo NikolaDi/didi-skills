@@ -17,7 +17,7 @@
 ## 读取 BOM 源数据
 
 1. 只读导出前，通过[连接流程](connection.md)定位用户指定的工程和图页。若用户指的是编辑器里刚改的图，读取该窗口的活动设计。多页工程覆盖该板关联的所有原理图页，记录采用的装配变体。
-2. 用 `sch_PrimitiveComponent.getAll` 枚举目标范围的器件实例。读取 `getState_Designator()`、`getState_Footprint()`，结合所选装配变体解释 `getState_AddIntoBom()`。页源中缺少实例覆盖字段时读回有效值；排除装配说明、图框等非物料对象。多单元符号按物理位号并为一件。
+2. 用 `sch_PrimitiveComponent.getAll` 枚举目标范围的实例，读取 `getState_Designator()`、`getState_Footprint()` 和 `getState_AddIntoBom()`。最后一个字段只表示是否加入 BOM。另从所选装配变体或图面取得实装依据。只有项目明确约定该标志与贴装状态等价时，才按其值映射实装与 DNP；导出表中缺少某行也不足以判为 DNP。页源缺少实例覆盖字段时读回有效值。排除图框等非物料对象，多单元符号按物理位号合并。
 3. 从图页实例读取设计者设置的值、型号和可见名称。遇到继承名称、库型号残留或显示值与导出字段不一致时，用同一活动图页导出的 PDF 对照位号确认。取得设计数据后按 [BOM 与成本估算](../bom-and-costing.md) 归并和交付。
 
 ## 导入 PCB 与编辑板图
@@ -29,7 +29,7 @@
 
 ## 检查与导出
 
-- **原生检查。** 在原理图页执行 `await eda.sch_Drc.check(true, false, true)`，在 PCB 执行 `await eda.pcb_Drc.check(true, false, true)`。这些重载返回详细数组，记录错误、警告及关联对象。PCB 另查原生未连接结果。比较网络时，可从原理图导出 Protel2 网表，并从目标板读取对应格式的网表。
+- **原生检查。** 在原理图页执行 `await eda.sch_Drc.check(true, false, true)`，在 PCB 执行 `await eda.pcb_Drc.check(true, false, true)`。按[检查结果的调用约定](api-usage.md#调用约定)统计实际违规，记录严重度与关联对象。PCB 另查原生未连接结果。比较网络时，可从原理图导出 Protel2 网表，并从目标板读取对应格式的网表。
 - **工程文件。** 保存操作按文档类型调用 `sch_Document.save()` 或 `pcb_Document.save()` 并检查返回值。用 `sys_FileManager.getProjectFile(fileName, undefined, 'epro')` 取得原生包。仅受托只读导出时保持当前工程状态，并标明所导出版次。
 - **图纸与预览。** 原理图整页 PDF 用 `sch_ManufactureData.getExportDocumentFile`，明确选择图页范围和图幅。当前视区截图用 `dmt_EditorControl.getCurrentRenderedAreaImage`；PCB 预览先适配板框、选择相应图层并取消选择高亮。
 - **文件回传。** 对返回的 `File` 或 `Blob` 读取 `arrayBuffer()`。走 JSON 桥接时分块编码，由外部客户端解码并保存；文件过大时可用客户端原生导出。重新打开交付包核对板、图页与库绑定，检查 PDF 页数和图面，并报告实际取得的检查结果。

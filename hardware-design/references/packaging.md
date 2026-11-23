@@ -1,6 +1,6 @@
 # 打包 hardware-design
 
-在本 skill 根目录运行以下命令。默认输出也位于本目录的 `dist/`。
+在维护仓库的 skill 根目录运行以下命令，产物写入本目录的 `dist/`。从受管理的安装副本调用打包脚本时，用 `--output` 显式指定副本之外的交付路径。
 
 ```sh
 python scripts/package_skill.py --output dist/hardware-design.skill

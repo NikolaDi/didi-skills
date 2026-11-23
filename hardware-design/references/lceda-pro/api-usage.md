@@ -17,7 +17,7 @@
 - 图元异步修改使用 `const editable = primitive.toAsync(); editable.setState_X(x); ...; await editable.done();`，或使用该图元类公开的 `modify`。`done()` 也需要 `await`。
 - PCB 层号经 `EPCB_LayerId` 确认为 TOP=1、BOTTOM=2、TOP_SILKSCREEN=3、BOTTOM_SILKSCREEN=4、BOARD_OUTLINE=11；其他层另查枚举。`setLayerVisible` 的第二参数含义是“隐藏其他层”，不是目标层可见开关。
 - `importChanges(uuid)` 的可选参数为**原理图 UUID**，不是 PCB、图页或板 UUID；不传时使用同一 Board 关联原理图，独立 PCB 须明确提供对应原理图 UUID。
-- `check(..., true)` 返回详细错误数组；`check(..., false)` 返回布尔值。`[]` 与 `true` 分别按重载判断，不混用。
+- `check(..., true)` 返回详细数组。按当前版本结构展开分组，只统计实际违规条目，按原始严重度汇总并保留关联对象。同一条违规涉及多个对象仍计一次。顶层数组长度在分组模式下表示类别数。结构或严重度无法识别时，保留原始结果并标明未统计范围及原因。`check(..., false)` 返回整体通过状态，布尔值不能给出违规数量。
 - `createNetFlag` 创建电源或地符号；普通网络标签关联导线的网络名，`createNetPort` 创建端口。按已确认的方案选择对应的电气对象。
 
 ## 按任务查找
