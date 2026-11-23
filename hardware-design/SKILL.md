@@ -21,7 +21,7 @@ description: 设计、评审和交付板级硬件，覆盖选型、原理图、P
 | 绘制、重排或审图 | [原理图与连通性](references/schematic.md)、[器件参数标注](references/schematic.md#器件参数标注) | 能否沿线解释局部回路，读清器件型号与核心参数？ |
 | 绘制或评审某一类电路 | [14 类典型电路画法与图例](references/circuit-patterns.md) | 这一级的主通路、反馈、参考和控制端该怎样画，沿线要核对哪些节点？ |
 | 封装、结构、布局、走线或投板前检查 | [PCB 与装配](references/pcb.md) | 电流如何返回，是否装得下、焊得到、测得到？ |
-| 导出或更新 BOM、商城比价、整理渠道报价或估算成本 | [BOM 与成本估算](references/bom-and-costing.md) | 当前版本装哪些料，候选符合哪些设计要求，按目标批量实际要花多少钱？ |
+| 导出或更新 BOM、核查替料、商城比价或估算成本 | [BOM 与成本估算](references/bom-and-costing.md) | 哪些位号变了，候选型号和封装是否匹配，按目标批量实际要花多少钱？ |
 | 整理制板、采购、贴装与测试资料 | [生产资料与放行](references/production.md) | 工厂拿到这一版，能否唯一确定怎么做板、装什么和怎么验？ |
 | 首板上电、试产、量产维护、替代料或退市 | [验证与变更](references/verification.md) | 哪些指标已测，哪个批次受影响，变更后需要重验什么？ |
 | 比较两个版本或评审工程变更 | [设计变更复核](references/design-change-review.md) | 哪些改动影响连接、装配或验收，哪些下游资料需要同步？ |
