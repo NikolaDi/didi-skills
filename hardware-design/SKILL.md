@@ -18,7 +18,7 @@ description: 设计、评审和交付板级硬件，覆盖选型、原理图、P
 | 当前任务 | 阅读内容 | 应能回答的问题 |
 |---|---|---|
 | 新设计、改供电、选型、分配接口 | [需求与架构](references/architecture.md) | 最差工况是什么，哪个器件或接口限制整机？ |
-| 绘制、重排或审图 | [原理图与连通性](references/schematic.md)、[器件参数标注](references/schematic.md#器件参数标注) | 能否沿线解释局部回路，读清器件型号与核心参数？ |
+| 绘制、重排或审图 | [原理图与连通性](references/schematic.md)、[通用器件选库](references/schematic.md#通用器件选库)、[器件参数标注](references/schematic.md#器件参数标注) | 所选符号、封装和标注是否符合设计，能否沿线解释局部回路？ |
 | 绘制或评审某一类电路 | [14 类典型电路画法与图例](references/circuit-patterns.md) | 这一级的主通路、反馈、参考和控制端该怎样画，沿线要核对哪些节点？ |
 | 封装、结构、布局、走线或投板前检查 | [PCB 与装配](references/pcb.md) | 电流如何返回，是否装得下、焊得到、测得到？ |
 | 从工程生成 BOM、与基线比对，或沿用已有 BOM 刷新报价 | [BOM、替料核查与成本估算](references/bom-and-costing.md) | 本次核对了哪版工程或沿用哪份 BOM，候选是否匹配，按实际订购量要花多少钱？ |
