@@ -8,8 +8,7 @@ Skill（技能）是一个包含指令、参考资料、脚本和资源的文件
 
 | Skill | 一句话说明 | 平台 / 环境 |
 | --- | --- | --- |
-| [hardware-design](hardware-design/) | 原理图开画前确认选型与拓扑，覆盖原理图设计、PCB 手工布线、生产资料核对、样机验证及量产变更。 | 通用，跨 EDA 工具 |
-| [yiyang-jlc-eda](yiyang-jlc-eda/) | 操作桌面工程，完成桥接、绘图、导入 PCB、检查、导出及技能打包；设计任务配合同级 `hardware-design` 使用。 | 嘉立创 EDA 专业版 |
+| [hardware-design](hardware-design/) | 覆盖板级硬件设计、评审、生产交付与验证，可连接嘉立创 EDA 专业版绘图、导入 PCB、执行 ERC/DRC 并导出工程。 | 通用设计规则；工程操作支持嘉立创 EDA 专业版 |
 | [rigol-dho900-scope](rigol-dho900-scope/) | 通过随包 MCP 测量通道、截图并导出冻结波形；安装与调用见[连接说明](rigol-dho900-scope/references/connection.md)。 | DHO914/S、DHO924/S，USB VISA 或 LAN |
 | [circuit-to-notebook](circuit-to-notebook/) | 将电路图片或 PDF 整理为方案笔记与配套资料，每次询问导出目录，按方案归档并维护汇总索引。 | 通用 |
 | [wechat-miniprogram-automation](wechat-miniprogram-automation/) | 用微信开发者工具自带 `wechatide` CLI 驱动小程序模拟器，做刷新编译、截图验证、运行时执行 JS、mock wx API 与日志抓取。 | Windows（Git Bash），微信开发者工具 v0.3.x CLI |

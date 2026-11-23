@@ -49,7 +49,7 @@
 
 ## 已知的 skill 依赖关系
 
-- `yiyang-jlc-eda` 负责嘉立创 EDA 专业版操作，通用设计规则由同级的 `hardware-design` 维护。前者随包保留连接、工程操作、接口速查及打包脚本；设计规则变更只维护在后者。
+- 板级硬件任务统一从 `hardware-design/SKILL.md` 进入。通用设计规则按主题维护在 `hardware-design/references/`。已实现的软件流程使用 `references/<软件名>/`，对应的脚本、依赖清单和锁文件在 `scripts/<软件名>/`。目前使用 `lceda-pro` 表示嘉立创 EDA 专业版。整个 skill 的打包脚本放在 `scripts/`，来源记录在 `THIRD_PARTY_NOTICES.md`。构建产物放在忽略的 `dist/`，临时验证在仓库外执行。
 - `embedded-ui-prototype-generator`（生成符合 Embedded Export Spec v2 的页面）→ `embedded-ui-slice-exporter`（切片导出）。改任一方时检查另一方是否受影响。
 
 ## 不要做的事

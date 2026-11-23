@@ -1,0 +1,10 @@
+{
+  "name": "hardware-design-lceda-pro-bridge",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local EasyEDA Pro bridge for hardware-design",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": { "bridge": "node bridge-server.mjs" },
+  "dependencies": { "ws": "8.21.3" }
+}

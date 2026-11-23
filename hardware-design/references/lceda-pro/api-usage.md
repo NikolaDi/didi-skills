@@ -7,7 +7,7 @@
 - 上游项目：<https://github.com/easyeda/easyeda-api-skill>；本地集成基线 1.1.36。
 - 官方 API 文档：<https://prodocs.easyeda.com/en/api/>；按类名查找 API、枚举和接口。
 - API 网关：<https://github.com/easyeda/eext-run-api-gateway>；扩展市场入口：<https://jlc-ext.com/item/oshwhub/run-api-gateway>。
-- 桥接代码来源、许可证元数据和本地修改说明见 [第三方来源](../THIRD_PARTY_NOTICES.md)。本包不包含 EDA 客户端或网关扩展安装文件。
+- 桥接代码来源、许可证元数据和本地修改说明见 [第三方来源](../../THIRD_PARTY_NOTICES.md)。本包不包含 EDA 客户端或网关扩展安装文件。
 
 ## 调用约定
 

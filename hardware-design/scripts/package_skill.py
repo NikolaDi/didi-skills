@@ -1,4 +1,4 @@
-"""Package this skill using an explicit source allowlist."""
+"""将硬件设计规则、图例及嘉立创操作工具打包为可分发的 skill。"""
 import argparse
 import hashlib
 import json
@@ -20,10 +20,13 @@ def main():
     args = parser.parse_args()
     target = args.output.resolve()
     sources = [root / f for f in (
-        "SKILL.md", "README.md", "THIRD_PARTY_NOTICES.md", "package.json", "package-lock.json", ".gitignore", ".gitattributes",
+        "SKILL.md", "THIRD_PARTY_NOTICES.md", ".gitignore", ".gitattributes",
+        "scripts/package_skill.py", "scripts/lceda-pro/bridge-server.mjs",
+        "scripts/lceda-pro/eda_bridge.py", "scripts/lceda-pro/package.json",
+        "scripts/lceda-pro/package-lock.json",
     )]
     sources += sorted((root / "references").rglob("*.md"))
-    sources += sorted(p for p in (root / "scripts").iterdir() if p.suffix in {".py", ".mjs"})
+    sources += sorted((root / "assets" / "examples").glob("*.svg"))
     if any(not p.is_file() for p in sources):
         raise ValueError("Required packaging input is missing")
     if target in sources:
